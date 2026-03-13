@@ -1,0 +1,154 @@
+import { CheckCircle2, Flame, ListTodo, Target } from 'lucide-react'
+import { motion } from 'framer-motion'
+
+import { RingChart } from '@/components/charts/RingChart'
+import { WeeklyLineChart } from '@/components/charts/WeeklyLineChart'
+import { FocusTimer } from '@/components/FocusTimer'
+import { ProgressBar } from '@/components/ProgressBar'
+import { StatCard } from '@/components/StatCard'
+import { Card, CardContent } from '@/components/ui/card'
+import { useProductivityStore } from '@/hooks/useProductivityStore'
+import { useStreak } from '@/hooks/useStreak'
+import { daysBack, formatISODate, startOfDay, startOfWeek } from '@/utils/dates'
+import { getMotivationMessage } from '@/utils/motivation'
+
+export function DashboardPage() {
+  const greeting = 'Good Evening, Piyush 👋'
+  const { habits, tasks } = useProductivityStore()
+  const { streak, milestone, bumped } = useStreak()
+
+  const today = formatISODate(startOfDay(new Date()))
+  const habitsDoneToday = habits.filter((h) => h.completions[today]).length
+  const habitRatio = habitsDoneToday / Math.max(1, habits.length)
+
+  const tasksDone = tasks.filter((t) => t.completed).length
+  const tasksPending = tasks.filter((t) => !t.completed).length
+  const taskRatio = tasksDone / Math.max(1, tasks.length)
+
+  const weekStart = startOfWeek(new Date(), 1)
+  const weekStartISO = formatISODate(weekStart)
+  const weekDates = daysBack(7, startOfDay(new Date()))
+    .map((d) => formatISODate(d))
+    .filter((iso) => iso >= weekStartISO)
+
+  const habitsCompletedThisWeek = habits.reduce((sum, h) => {
+    const c = weekDates.reduce((s, iso) => s + (h.completions[iso] ? 1 : 0), 0)
+    return sum + c
+  }, 0)
+
+  const tasksCompletedThisWeek = tasks.filter((t) => t.completedAtISO && t.completedAtISO >= weekStartISO).length
+
+  const weekly = daysBack(7).map((d) => {
+    const iso = formatISODate(d)
+    const dayHabits = habits.filter((h) => h.completions[iso]).length
+    const dayTasks = tasks.filter((t) => t.completedAtISO === iso).length
+    const habitScore = (dayHabits / Math.max(1, habits.length)) * 60
+    const taskScore = (Math.min(dayTasks, 5) / 5) * 40
+    const score = Math.round(habitScore + taskScore)
+    const label = d.toLocaleDateString(undefined, { weekday: 'short' })
+    return { label, score }
+  })
+
+  const message = getMotivationMessage(new Date().getDate())
+
+  const weeklyHabitGoal = 20
+  const weeklyTaskGoal = 10
+  const habitGoalRatio = habitsCompletedThisWeek / Math.max(1, weeklyHabitGoal)
+  const taskGoalRatio = tasksCompletedThisWeek / Math.max(1, weeklyTaskGoal)
+
+  return (
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <div className="text-3xl font-semibold tracking-tight">{greeting}</div>
+        <div className="text-sm text-muted max-w-md">{message}</div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard
+          title="Habits Completed"
+          value={`${habitsDoneToday}/${habits.length}`}
+          subtitle="Logged today"
+          icon={Target}
+          accent="green"
+        />
+        <div className="relative">
+          <div className="absolute -top-2 right-2 z-10">
+            {milestone ? (
+              <motion.div
+                initial={{ opacity: 0, y: 6, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                className="rounded-full border border-border bg-card px-3 py-1 text-xs text-muted"
+              >
+                Milestone: <span className="text-foreground font-medium">{milestone} days</span>
+              </motion.div>
+            ) : null}
+          </div>
+          <motion.div
+            animate={bumped ? { scale: [1, 1.04, 1] } : { scale: 1 }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
+          >
+            <StatCard
+              title="Current Streak"
+              value={
+                <span className="inline-flex items-center gap-2">
+                  <Flame className="h-5 w-5 text-accentPurple" />
+                  <span className="tabular-nums">{streak} days</span>
+                </span>
+              }
+              subtitle="At least one habit per day"
+              icon={Flame}
+              accent="purple"
+            />
+          </motion.div>
+        </div>
+        <StatCard title="Tasks Completed" value={tasksDone} subtitle="All time (local)" icon={CheckCircle2} accent="blue" />
+        <StatCard title="Pending Tasks" value={tasksPending} subtitle="Queue remaining" icon={ListTodo} accent="blue" />
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <RingChart title="Habit Completion" value={habitRatio} color="green" subtitle="Today" />
+        <RingChart title="Task Completion" value={taskRatio} color="blue" subtitle="All tasks" />
+        <WeeklyLineChart data={weekly} />
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <FocusTimer />
+        <Card className="overflow-hidden">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between gap-3">
+              <div className="text-sm font-semibold tracking-tight">Weekly progress</div>
+              <div className="text-xs text-muted">
+                Since {weekStart.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+              </div>
+            </div>
+
+            <div className="mt-5 space-y-5">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-sm">
+                  <div className="font-medium">Habit goal</div>
+                  <div className="text-muted tabular-nums">
+                    {habitsCompletedThisWeek}/{weeklyHabitGoal}
+                  </div>
+                </div>
+                <ProgressBar value={habitGoalRatio} color="green" />
+                <div className="text-xs text-muted">Every check-in counts.</div>
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-sm">
+                  <div className="font-medium">Task goal</div>
+                  <div className="text-muted tabular-nums">
+                    {tasksCompletedThisWeek}/{weeklyTaskGoal}
+                  </div>
+                </div>
+                <ProgressBar value={taskGoalRatio} color="blue" />
+                <div className="text-xs text-muted">Finish fewer things, better.</div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  )
+}
+

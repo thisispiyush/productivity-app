@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark theme (default) */
+    --background: #0a0a0a;
+    --card: #111111;
+    --surface: rgba(255, 255, 255, 0.04);
+    --surface-hover: rgba(255, 255, 255, 0.06);
+    --border: #1f1f1f;
+    --foreground: #ffffff;
+    --muted: #a1a1aa;
+
+    --accent-blue: #4f7cff;
+    --accent-purple: #8b5cf6;
+    --accent-green: #22c55e;
+
+    --glass-bg: color-mix(in srgb, var(--card) 72%, transparent);
+    --glass-border: color-mix(in srgb, var(--border) 82%, transparent);
+    --glass-shadow: none;
+    --glass-blur: blur(14px);
+
+    --shadow-card: 0 0 0 1px color-mix(in srgb, var(--foreground) 6%, transparent), 0 20px 40px rgba(0, 0, 0, 0.35);
+    --shadow-card-hover: 0 0 0 1px color-mix(in srgb, var(--foreground) 8%, transparent), 0 20px 40px rgba(0, 0, 0, 0.35),
+      0 0 24px color-mix(in srgb, var(--accent-blue) 16%, transparent);
+    --shadow-popover: 0 0 0 1px color-mix(in srgb, var(--foreground) 8%, transparent), 0 24px 60px rgba(0, 0, 0, 0.55);
+
+    --timer-track: rgba(255, 255, 255, 0.08);
+
+    --chart-grid: rgba(255, 255, 255, 0.06);
+    --chart-tick: rgba(161, 161, 170, 0.9);
+    --chart-cursor: rgba(255, 255, 255, 0.06);
+    --chart-ring-bg: rgba(255, 255, 255, 0.06);
+
+    --tooltip-bg: #111111;
+    --tooltip-border: #1f1f1f;
+    --tooltip-label: rgba(161, 161, 170, 0.9);
+
+    color-scheme: dark;
+  }
+
+  html.light {
+    /* Light theme */
+    --background: #f9fafb;
+    --card: #ffffff;
+    --surface: #f3f4f6;
+    --surface-hover: #e9edf2;
+    --border: #e5e7eb;
+    --foreground: #111827;
+    --muted: #6b7280;
+
+    --accent-blue: #4f7cff;
+    --accent-purple: #8b5cf6;
+    --accent-green: #22c55e;
+
+    --glass-bg: #f8fafc;
+    --glass-border: #e5e7eb;
+    --glass-shadow: 0 1px 0 rgba(15, 23, 42, 0.02), 0 10px 24px rgba(15, 23, 42, 0.06);
+    --glass-blur: none;
+
+    --shadow-card: 0 4px 10px rgba(0, 0, 0, 0.04);
+    --shadow-card-hover: 0 8px 18px rgba(0, 0, 0, 0.06);
+    --shadow-popover: 0 12px 30px rgba(15, 23, 42, 0.14);
+
+    --timer-track: rgba(17, 24, 39, 0.12);
+
+    --chart-grid: rgba(17, 24, 39, 0.08);
+    --chart-tick: rgba(107, 114, 128, 0.95);
+    --chart-cursor: rgba(17, 24, 39, 0.1);
+    --chart-ring-bg: rgba(17, 24, 39, 0.08);
+
+    --tooltip-bg: #ffffff;
+    --tooltip-border: #e5e7eb;
+    --tooltip-label: rgba(107, 114, 128, 0.95);
+
+    color-scheme: light;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    transition:
+      background-color 240ms ease,
+      color 240ms ease;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html.theme-transition,
+    html.theme-transition * {
+      transition:
+        background-color 300ms ease,
+        color 300ms ease,
+        border-color 300ms ease,
+        box-shadow 300ms ease,
+        fill 300ms ease,
+        stroke 300ms ease;
+    }
+  }
+
+  #root {
+    height: 100%;
+  }
+
+  ::selection {
+    background: rgba(79, 124, 255, 0.25);
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: var(--glass-blur);
+  }
+
+  .hover-glow {
+    box-shadow: var(--shadow-card);
+  }
+
+  .hover-glow:hover {
+    box-shadow: var(--shadow-card-hover);
+  }
+}
