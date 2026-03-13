@@ -1,33 +1,52 @@
 # Pulse — Productivity OS
+# Productivity Tracker Web App
 
-Premium, minimal productivity web app (Dashboard, Habit Tracker, Task Manager, Analytics).
+A modern productivity web application that helps users track habits, manage tasks, and analyse productivity patterns.
 
-## Tech
+## Features
 
-- React (Vite) + TypeScript
-- TailwindCSS
-- shadcn/ui-style primitives (Radix + Tailwind)
-- lucide-react icons
-- Recharts
-- framer-motion
-- @dnd-kit drag & drop
+- User authentication (login/signup)
+- Habit tracking system
+- Task manager
+- Productivity analytics dashboard
+- Dark / Light mode
+- Focus timer
 
-## Run locally
+## Tech Stack
 
-```bash
+Frontend:
+- React
+- Tailwind CSS
+- Vite
+
+Backend:
+- Supabase (Authentication + Database)
+
+Deployment:
+- Vercel
+
+## Live Demo
+
+https://your-app-link.vercel.app
+
+## How to Run Locally
+
+1. Clone the repository
+
+git clone https://github.com/yourusername/project-name
+
+2. Install dependencies
+
 npm install
+
+3. Start development server
+
 npm run dev
-```
 
-## Structure
+## Screenshots
 
-- `src/layout/`: Sidebar + app layout + page transitions
-- `src/pages/`: Dashboard, Habit Tracker, Task Manager, Analytics
-- `src/components/`: reusable cards + charts + task/habit UI
-- `src/components/ui/`: shadcn-style UI primitives
-- `src/hooks/`: localStorage persistence + store
-- `src/utils/`: dates, ids, helpers
+(Add screenshots of your dashboard, habit tracker, analytics etc.)
 
-## Notes
+## Author
 
-- Data persists in `localStorage` (no backend yet).
+Piyush Chaudhary
