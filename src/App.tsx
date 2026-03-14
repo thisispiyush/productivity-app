@@ -4,6 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AppLayout } from '@/layout/AppLayout'
 import { AuthLayout } from '@/layout/AuthLayout'
 import { AnalyticsPage } from '@/pages/Analytics'
+import { AuthEntryPage } from '@/pages/AuthEntry'
 import { DashboardPage } from '@/pages/Dashboard'
 import { HabitTrackerPage } from '@/pages/HabitTracker'
 import { LoginPage } from '@/pages/Login'
@@ -18,7 +19,7 @@ import { useAuth } from '@/hooks/useAuth'
 function ProtectedRoute({ children }: { children: ReactElement }) {
   const { user, initializing } = useAuth()
   if (initializing) return null
-  if (!user) return <Navigate to="/login" replace />
+  if (!user) return <Navigate to="/auth" replace />
   return children
 }
 
@@ -27,6 +28,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<AuthLayout />}>
+          <Route path="/auth" element={<AuthEntryPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />

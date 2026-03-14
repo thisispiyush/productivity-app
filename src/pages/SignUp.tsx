@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { Apple, Github, Mail, Shield } from 'lucide-react'
+import { Chrome, Mail, Shield } from 'lucide-react'
 import * as React from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useAuth } from '@/hooks/useAuth'
+import { supabase } from '@/lib/supabaseClient'
 
 export function SignUpPage() {
   const navigate = useNavigate()
@@ -16,6 +17,7 @@ export function SignUpPage() {
   const [error, setError] = React.useState<string | null>(null)
   const [success, setSuccess] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
+  const [oauthLoading, setOauthLoading] = React.useState(false)
 
   React.useEffect(() => {
     if (!initializing && user && !success) {
@@ -36,6 +38,20 @@ export function SignUpPage() {
     setSuccess(true)
   }
 
+  const handleGoogle = async () => {
+    setOauthLoading(true)
+    setError(null)
+    try {
+      const { error: supaError } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: `${window.location.origin}/` },
+      })
+      if (supaError) setError(supaError.message)
+    } finally {
+      setOauthLoading(false)
+    }
+  }
+
   return (
     <Card className="overflow-hidden">
       <CardHeader>
@@ -43,23 +59,6 @@ export function SignUpPage() {
         <CardDescription>Start tracking habits and shipping tasks. (UI only)</CardDescription>
       </CardHeader>
       <CardContent className="space-y-5">
-        <div className="grid gap-2">
-          <Button variant="secondary" ripple className="justify-center">
-            <Github className="h-4 w-4" />
-            Continue with GitHub
-          </Button>
-          <Button variant="secondary" ripple className="justify-center">
-            <Apple className="h-4 w-4" />
-            Continue with Apple
-          </Button>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <div className="h-px flex-1 bg-border" />
-          <div className="text-xs text-muted">or</div>
-          <div className="h-px flex-1 bg-border" />
-        </div>
-
         <div className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
@@ -93,6 +92,10 @@ export function SignUpPage() {
           ) : null}
           <Button variant="purple" ripple className="w-full" onClick={handleAuth} disabled={loading}>
             {loading ? 'Creating…' : 'Create account'}
+          </Button>
+          <Button variant="secondary" ripple className="w-full" onClick={handleGoogle} disabled={oauthLoading}>
+            <Chrome className="h-4 w-4" />
+            {oauthLoading ? 'Connectingâ€¦' : 'Continue with Google'}
           </Button>
         </div>
 
