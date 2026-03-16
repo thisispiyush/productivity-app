@@ -5,15 +5,15 @@
 @layer base {
   :root {
     /* Dark theme (default) */
-    --background: #0a0a0a;
+    --background: #000000;
     --card: #111111;
-    --surface: rgba(255, 255, 255, 0.04);
-    --surface-hover: rgba(255, 255, 255, 0.06);
-    --border: #1f1f1f;
+    --surface: #1a1a1a;
+    --surface-hover: #1e1e1e;
+    --border: #2a2a2a;
     --foreground: #ffffff;
-    --muted: #a1a1aa;
+    --muted: #888888;
 
-    --accent-blue: #4f7cff;
+    --accent-blue: #4f6ef7;
     --accent-purple: #8b5cf6;
     --accent-green: #22c55e;
 
@@ -22,10 +22,9 @@
     --glass-shadow: none;
     --glass-blur: blur(14px);
 
-    --shadow-card: 0 0 0 1px color-mix(in srgb, var(--foreground) 6%, transparent), 0 20px 40px rgba(0, 0, 0, 0.35);
-    --shadow-card-hover: 0 0 0 1px color-mix(in srgb, var(--foreground) 8%, transparent), 0 20px 40px rgba(0, 0, 0, 0.35),
-      0 0 24px color-mix(in srgb, var(--accent-blue) 16%, transparent);
-    --shadow-popover: 0 0 0 1px color-mix(in srgb, var(--foreground) 8%, transparent), 0 24px 60px rgba(0, 0, 0, 0.55);
+    --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 0 40px rgba(0, 0, 0, 0.6);
+    --shadow-card-hover: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 46px rgba(0, 0, 0, 0.65), 0 0 24px rgba(79, 110, 247, 0.12);
+    --shadow-popover: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 30px 80px rgba(0, 0, 0, 0.7);
 
     --timer-track: rgba(255, 255, 255, 0.08);
 
@@ -43,25 +42,25 @@
 
   html.light {
     /* Light theme */
-    --background: #f9fafb;
+    --background: #f4f4f5;
     --card: #ffffff;
-    --surface: #f3f4f6;
-    --surface-hover: #e9edf2;
+    --surface: #ffffff;
+    --surface-hover: #f3f4f6;
     --border: #e5e7eb;
-    --foreground: #111827;
-    --muted: #6b7280;
+    --foreground: #111111;
+    --muted: #666666;
 
-    --accent-blue: #4f7cff;
+    --accent-blue: #4f6ef7;
     --accent-purple: #8b5cf6;
     --accent-green: #22c55e;
 
-    --glass-bg: #f8fafc;
+    --glass-bg: #ffffff;
     --glass-border: #e5e7eb;
     --glass-shadow: 0 1px 0 rgba(15, 23, 42, 0.02), 0 10px 24px rgba(15, 23, 42, 0.06);
     --glass-blur: none;
 
-    --shadow-card: 0 4px 10px rgba(0, 0, 0, 0.04);
-    --shadow-card-hover: 0 8px 18px rgba(0, 0, 0, 0.06);
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
+    --shadow-card-hover: 0 10px 28px rgba(0, 0, 0, 0.12);
     --shadow-popover: 0 12px 30px rgba(15, 23, 42, 0.14);
 
     --timer-track: rgba(17, 24, 39, 0.12);
@@ -108,7 +107,52 @@
   }
 
   ::selection {
-    background: rgba(79, 124, 255, 0.25);
+    background: rgba(79, 110, 247, 0.25);
+  }
+
+  /*
+    Prevent the "white click outline" bug on charts/cards (notably Recharts wrappers and
+    other tabIndex containers) while preserving keyboard accessibility via :focus-visible.
+  */
+  :where(*):focus {
+    outline: none;
+  }
+
+  :where(*):focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+  }
+
+  :where(a, [tabindex]:not([tabindex='-1'])):focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--accent-blue) 55%, transparent);
+    outline-offset: 2px;
+  }
+
+  /* Recharts can show an unexpected focus outline on click in some browsers */
+  .recharts-wrapper,
+  .recharts-surface,
+  .recharts-wrapper *,
+  .recharts-surface * {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .recharts-wrapper:focus,
+  .recharts-wrapper:focus-visible,
+  .recharts-wrapper:focus-within,
+  .recharts-surface:focus,
+  .recharts-surface:focus-visible,
+  .recharts-surface:focus-within,
+  .recharts-wrapper svg:focus,
+  .recharts-wrapper svg:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: inherit !important;
+  }
+
+  /* Don't apply our generic [tabindex] focus-visible outline to Recharts wrappers. */
+  :where(.recharts-wrapper, .recharts-surface):focus-visible {
+    outline: none !important;
   }
 }
 

@@ -86,7 +86,7 @@ export function SettingsPage() {
               className="rounded-2xl border border-red-500/30 text-red-600 hover:bg-red-500/10"
             >
               <LogOut className="h-4 w-4" />
-              {signingOut ? 'Logging outâ€¦' : 'Logout'}
+              {signingOut ? 'Logging out...' : 'Logout'}
             </Button>
           </CardContent>
         </Card>
@@ -94,4 +94,3 @@ export function SettingsPage() {
     </div>
   )
 }
-

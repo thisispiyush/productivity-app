@@ -22,6 +22,14 @@ export function RingChart({
   const fill = color === 'green' ? '#22C55E' : color === 'purple' ? '#8B5CF6' : '#4F7CFF'
   const bg = 'var(--chart-ring-bg)'
 
+  const blurRechartsFocus = () => {
+    window.requestAnimationFrame(() => {
+      const el = document.activeElement as HTMLElement | null
+      if (!el) return
+      if (el.classList?.contains('recharts-wrapper') || el.closest?.('.recharts-wrapper')) el.blur?.()
+    })
+  }
+
   return (
     <Card className="overflow-hidden">
       <CardHeader className="pb-0">
@@ -31,7 +39,7 @@ export function RingChart({
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-4">
-        <div className="h-44">
+        <div className="h-44" onPointerDownCapture={blurRechartsFocus}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie

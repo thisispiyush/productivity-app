@@ -4,8 +4,33 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0A0A0A" />
-    <title>Pulse — Productivity OS</title>
+    <meta name="theme-color" content="#000000" />
+    <script>
+      (function () {
+        try {
+          var key = 'pulse-theme'
+          var saved = localStorage.getItem(key)
+          var theme = null
+          if (saved === 'dark' || saved === 'light') {
+            theme = saved
+          } else {
+            var mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)')
+            if (mq && typeof mq.matches === 'boolean') theme = mq.matches ? 'dark' : 'light'
+          }
+          if (!theme) theme = 'dark'
+
+          var root = document.documentElement
+          root.classList.remove('dark', 'light')
+          root.classList.add(theme)
+
+          var meta = document.querySelector('meta[name="theme-color"]')
+          if (meta) meta.setAttribute('content', theme === 'dark' ? '#000000' : '#F4F4F5')
+        } catch (e) {
+          document.documentElement.classList.add('dark')
+        }
+      })()
+    </script>
+    <title>Pulse - Productivity OS</title>
   </head>
   <body>
     <div id="root"></div>

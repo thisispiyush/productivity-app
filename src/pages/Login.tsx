@@ -1,9 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { Chrome, Mail } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import * as React from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { GoogleIcon } from '@/components/icons/GoogleIcon'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useAuth } from '@/hooks/useAuth'
@@ -32,7 +33,7 @@ export function LoginPage() {
     if (result.error) {
       const msg = result.error.toLowerCase()
       if (msg.includes('invalid login credentials') || msg.includes('invalid')) {
-        setError('Invalid email or password. Please try again.')
+        setError('Invalid email or password')
       } else {
         setError(result.error)
       }
@@ -59,7 +60,7 @@ export function LoginPage() {
     <Card className="overflow-hidden">
       <CardHeader>
         <CardTitle className="text-xl tracking-tight">Welcome back</CardTitle>
-        <CardDescription>Sign in to your workspace. (UI only)</CardDescription>
+        <CardDescription>Sign in to your workspace</CardDescription>
       </CardHeader>
       <CardContent className="space-y-5">
         <div className="space-y-4">
@@ -94,19 +95,25 @@ export function LoginPage() {
             </Link>
           </div>
           {error ? <div className="text-xs text-red-500">{error}</div> : null}
-          <Button variant="blue" ripple className="w-full" onClick={handleAuth} disabled={loading}>
-            {loading ? 'Signing in…' : 'Sign in'}
+          <Button variant="blue" ripple className="w-full rounded-xl" onClick={handleAuth} disabled={loading}>
+            {loading ? 'Logging in...' : 'Log In'}
           </Button>
-          <Button variant="secondary" ripple className="w-full" onClick={handleGoogle} disabled={oauthLoading}>
-            <Chrome className="h-4 w-4" />
-            {oauthLoading ? 'Connectingâ€¦' : 'Continue with Google'}
+          <Button
+            variant="secondary"
+            ripple
+            className="w-full rounded-xl border border-border bg-white text-foreground hover:bg-surface dark:bg-card dark:hover:bg-[var(--surface-hover)]"
+            onClick={handleGoogle}
+            disabled={oauthLoading}
+          >
+            <GoogleIcon className="h-4 w-4" />
+            {oauthLoading ? 'Connecting...' : 'Continue with Google'}
           </Button>
         </div>
 
         <div className="text-center text-sm text-muted">
-          New here?{' '}
+          Don't have an account?{' '}
           <Link to="/signup" className="text-foreground hover:underline">
-            Create an account
+            Sign up
           </Link>
         </div>
       </CardContent>

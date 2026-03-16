@@ -10,7 +10,7 @@ type AuthCtx = {
   session: Session | null
   initializing: boolean
   signInWithEmail: (opts: { email: string; password: string }) => Promise<{ error?: string }>
-  signUpWithEmail: (opts: { email: string; password: string }) => Promise<{ error?: string }>
+  signUpWithEmail: (opts: { email: string; password: string; name?: string }) => Promise<{ error?: string }>
   signOut: () => Promise<void>
 }
 
@@ -72,10 +72,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return {}
   }, [])
 
-  const signUpWithEmail = React.useCallback(async ({ email, password }: { email: string; password: string }) => {
+  const signUpWithEmail = React.useCallback(async ({ email, password, name }: { email: string; password: string; name?: string }) => {
     const { error } = await supabase.auth.signUp({
       email,
       password,
+      options: name ? { data: { name } } : undefined,
     })
     if (error) {
       return { error: error.message }
@@ -107,4 +108,3 @@ export function useAuth() {
   if (!ctx) throw new Error('useAuth must be used within AuthProvider')
   return ctx
 }
-

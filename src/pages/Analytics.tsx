@@ -33,6 +33,14 @@ function tooltipStyle() {
 export function AnalyticsPage() {
   const { habits, tasks } = useProductivityStore()
 
+  const blurRechartsFocus = React.useCallback(() => {
+    window.requestAnimationFrame(() => {
+      const el = document.activeElement as HTMLElement | null
+      if (!el) return
+      if (el.classList?.contains('recharts-wrapper') || el.closest?.('.recharts-wrapper')) el.blur?.()
+    })
+  }, [])
+
   const taskDoneByDate = React.useMemo(() => {
     const map = new Map<string, number>()
     for (const t of tasks) {
@@ -84,7 +92,7 @@ export function AnalyticsPage() {
             <CardTitle>Habit streak trends</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-64">
+            <div className="h-64" onPointerDownCapture={blurRechartsFocus}>
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={habitTrend} margin={{ left: 6, right: 18, top: 8, bottom: 0 }}>
                   <CartesianGrid stroke="var(--chart-grid)" vertical={false} />
@@ -103,7 +111,7 @@ export function AnalyticsPage() {
             <CardTitle>Task completion trends</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-64">
+            <div className="h-64" onPointerDownCapture={blurRechartsFocus}>
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={taskTrend} margin={{ left: 6, right: 18, top: 8, bottom: 0 }}>
                   <CartesianGrid stroke="var(--chart-grid)" vertical={false} />
@@ -127,13 +135,13 @@ export function AnalyticsPage() {
       <Card className="overflow-hidden">
         <CardHeader className="pb-2">
           <CardTitle>Weekly productivity score</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="h-72">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={productivity} margin={{ left: 6, right: 18, top: 8, bottom: 0 }}>
-                <CartesianGrid stroke="var(--chart-grid)" vertical={false} />
-                <XAxis dataKey="label" tick={{ fill: 'var(--chart-tick)', fontSize: 12 }} axisLine={false} tickLine={false} />
+      </CardHeader>
+      <CardContent>
+        <div className="h-72" onPointerDownCapture={blurRechartsFocus}>
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={productivity} margin={{ left: 6, right: 18, top: 8, bottom: 0 }}>
+              <CartesianGrid stroke="var(--chart-grid)" vertical={false} />
+              <XAxis dataKey="label" tick={{ fill: 'var(--chart-tick)', fontSize: 12 }} axisLine={false} tickLine={false} />
                 <YAxis domain={[0, 100]} tick={{ fill: 'var(--chart-tick)', fontSize: 12 }} axisLine={false} tickLine={false} />
                 <Tooltip {...tooltipStyle()} />
                 <Bar dataKey="score" radius={[12, 12, 12, 12]} fill="rgba(139,92,246,0.85)" />

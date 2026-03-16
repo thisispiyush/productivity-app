@@ -11,14 +11,13 @@ export function AuthEntryPage() {
         <CardDescription>Choose how you want to continue.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-3">
-        <Button asChild variant="blue" ripple className="w-full">
+        <Button asChild variant="blue" ripple className="w-full rounded-xl">
           <Link to="/login">Sign In</Link>
         </Button>
-        <Button asChild variant="secondary" ripple className="w-full">
+        <Button asChild variant="secondary" ripple className="w-full rounded-xl">
           <Link to="/signup">Create Account</Link>
         </Button>
       </CardContent>
     </Card>
   )
 }
-

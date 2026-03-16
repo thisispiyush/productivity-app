@@ -11,7 +11,24 @@ type ThemeCtx = {
 
 const ThemeContext = React.createContext<ThemeCtx | null>(null)
 
-const storageKey = 'pulse.theme.v1'
+const storageKey = 'pulse-theme'
+
+function getInitialTheme(): Theme {
+  // Step 1: Check localStorage for saved preference
+  try {
+    const saved = localStorage.getItem(storageKey)
+    if (saved === 'dark' || saved === 'light') return saved
+  } catch {
+    // ignore
+  }
+
+  // Step 2: Check system preference
+  const systemDark = window.matchMedia?.('(prefers-color-scheme: dark)')?.matches
+  if (systemDark !== undefined) return systemDark ? 'dark' : 'light'
+
+  // Step 3: Fallback to dark (Pulse is intentionally dark-forward)
+  return 'dark'
+}
 
 function applyThemeToDOM(theme: Theme) {
   const root = document.documentElement
@@ -22,13 +39,13 @@ function applyThemeToDOM(theme: Theme) {
   }
   root.classList.toggle('dark', theme === 'dark')
   root.classList.toggle('light', theme === 'light')
+
+  const meta = document.querySelector?.('meta[name="theme-color"]')
+  if (meta) meta.setAttribute('content', theme === 'dark' ? '#000000' : '#F4F4F5')
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = React.useState<Theme>(() => {
-    const raw = localStorage.getItem(storageKey)
-    return raw === 'light' ? 'light' : 'dark'
-  })
+  const [theme, setThemeState] = React.useState<Theme>(() => getInitialTheme())
 
   const setTheme = React.useCallback((t: Theme) => {
     setThemeState(t)

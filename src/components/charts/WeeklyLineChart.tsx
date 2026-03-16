@@ -13,13 +13,22 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 type Point = { label: string; score: number }
 
 export function WeeklyLineChart({ data }: { data: Point[] }) {
+  const blurRechartsFocus = () => {
+    // Recharts may focus its internal wrapper/SVG on click; immediately blur to avoid click outlines.
+    window.requestAnimationFrame(() => {
+      const el = document.activeElement as HTMLElement | null
+      if (!el) return
+      if (el.classList?.contains('recharts-wrapper') || el.closest?.('.recharts-wrapper')) el.blur?.()
+    })
+  }
+
   return (
     <Card className="overflow-hidden">
       <CardHeader className="pb-2">
         <CardTitle>Weekly Productivity</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="h-64">
+        <div className="h-64" onPointerDownCapture={blurRechartsFocus}>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={data} margin={{ left: 6, right: 18, top: 8, bottom: 0 }}>
               <CartesianGrid stroke="var(--chart-grid)" vertical={false} />

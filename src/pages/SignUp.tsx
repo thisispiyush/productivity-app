@@ -1,9 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { Chrome, Mail, Shield } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import * as React from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { GoogleIcon } from '@/components/icons/GoogleIcon'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useAuth } from '@/hooks/useAuth'
@@ -55,8 +56,8 @@ export function SignUpPage() {
   return (
     <Card className="overflow-hidden">
       <CardHeader>
-        <CardTitle className="text-xl tracking-tight">Create your account</CardTitle>
-        <CardDescription>Start tracking habits and shipping tasks. (UI only)</CardDescription>
+        <CardTitle className="text-xl tracking-tight">Let's Get Started 🚀</CardTitle>
+        <CardDescription>Create your productivity account</CardDescription>
       </CardHeader>
       <CardContent className="space-y-5">
         <div className="space-y-4">
@@ -87,27 +88,28 @@ export function SignUpPage() {
           {error ? <div className="text-xs text-red-400">{error}</div> : null}
           {success ? (
             <div className="rounded-2xl border border-border bg-surface p-3 text-xs text-muted">
-              Account created successfully. Please check your email to confirm your account before logging in.
+              Verification email sent. Please check your inbox to confirm your account.
             </div>
           ) : null}
-          <Button variant="purple" ripple className="w-full" onClick={handleAuth} disabled={loading}>
-            {loading ? 'Creating…' : 'Create account'}
+          <Button variant="blue" ripple className="w-full rounded-xl" onClick={handleAuth} disabled={loading}>
+            {loading ? 'Signing up...' : 'Sign up with Email'}
           </Button>
-          <Button variant="secondary" ripple className="w-full" onClick={handleGoogle} disabled={oauthLoading}>
-            <Chrome className="h-4 w-4" />
-            {oauthLoading ? 'Connectingâ€¦' : 'Continue with Google'}
+          <Button
+            variant="secondary"
+            ripple
+            className="w-full rounded-xl border border-border bg-white text-foreground hover:bg-surface dark:bg-card dark:hover:bg-[var(--surface-hover)]"
+            onClick={handleGoogle}
+            disabled={oauthLoading}
+          >
+            <GoogleIcon className="h-4 w-4" />
+            {oauthLoading ? 'Connecting...' : 'Continue with Google'}
           </Button>
-        </div>
-
-        <div className="flex items-start gap-2 rounded-2xl border border-border bg-surface p-3 text-xs text-muted">
-          <Shield className="mt-0.5 h-4 w-4 text-accentBlue" />
-          This is UI-only for now. Add real auth later without changing the design system.
         </div>
 
         <div className="text-center text-sm text-muted">
           Already have an account?{' '}
           <Link to="/login" className="text-foreground hover:underline">
-            Sign in
+            Log in
           </Link>
         </div>
       </CardContent>
