@@ -33,9 +33,9 @@ export function Sidebar() {
               end={item.to === '/'}
               className={({ isActive }) =>
                 cn(
-                  'group flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm text-muted transition-colors hover:bg-[var(--surface-hover)] hover:text-foreground',
+                  'group flex items-center gap-3 rounded-2xl border-l-[3px] border-l-transparent px-3 py-2.5 text-sm text-muted transition-colors hover:bg-[var(--surface-hover)] hover:text-foreground',
                   isActive &&
-                    'bg-surface text-foreground ring-1 ring-border shadow-[var(--shadow-card)]',
+                    'bg-[#EFF6FF] text-accentBlue dark:bg-surface dark:text-foreground ring-1 ring-border shadow-[var(--shadow-card)] border-l-accentBlue',
                 )
               }
             >

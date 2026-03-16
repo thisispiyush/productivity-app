@@ -19,6 +19,7 @@ type StoreActions = {
   addHabit: (input: { name: string; icon: Habit['icon'] }) => Promise<void>
   updateHabit: (habitId: string, input: { name: string; icon: Habit['icon'] }) => Promise<void>
   deleteHabit: (habitId: string) => Promise<void>
+  clearAllData: () => Promise<void>
   addTask: (input: { title: string; priority: Priority; dueDateISO?: string }) => Promise<void>
   updateTask: (taskId: string, input: { title: string; priority: Priority; dueDateISO?: string }) => Promise<void>
   toggleTask: (taskId: string, status: boolean) => Promise<void>
@@ -245,6 +246,27 @@ export function ProductivityStoreProvider({ children }: { children: React.ReactN
     [],
   )
 
+  const clearAllData = React.useCallback(async () => {
+    const { data: { user: sessionUser } } = await supabase.auth.getUser()
+    if (!sessionUser) return
+
+    // Delete tasks first to avoid any dependent views; habits are independent.
+    const tasksRes = await supabase.from('tasks').delete().eq('user_id', sessionUser.id)
+    const habitsRes = await supabase.from('habits').delete().eq('user_id', sessionUser.id)
+
+    if (tasksRes.error || habitsRes.error) {
+      console.error('Clear all data error:', tasksRes.error ?? habitsRes.error)
+      pushError({
+        message: 'Failed to clear your data.',
+        hint: 'Check your Supabase permissions (RLS) for delete operations.',
+      })
+      return
+    }
+
+    setTasks([])
+    setHabits([])
+  }, [pushError])
+
   const addTask = React.useCallback(
     async (input: { title: string; priority: Priority; dueDateISO?: string }) => {
       const { data: { user: sessionUser } } = await supabase.auth.getUser()
@@ -399,6 +421,7 @@ export function ProductivityStoreProvider({ children }: { children: React.ReactN
       addHabit,
       updateHabit,
       deleteHabit,
+      clearAllData,
       addTask,
       updateTask,
       toggleTask,
@@ -413,6 +436,7 @@ export function ProductivityStoreProvider({ children }: { children: React.ReactN
       addHabit,
       updateHabit,
       deleteHabit,
+      clearAllData,
       addTask,
       updateTask,
       toggleTask,

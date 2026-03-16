@@ -5,11 +5,12 @@ import { Pause, Play, RotateCcw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useInterval } from '@/hooks/useInterval'
+import { usePreferences } from '@/hooks/usePreferences'
 import { cn } from '@/utils/cn'
 
 type Mode = 'focus' | 'break'
 
-const FOCUS_SECONDS = 25 * 60
+const DEFAULT_FOCUS_SECONDS = 25 * 60
 const BREAK_SECONDS = 5 * 60
 
 function pad(n: number) {
@@ -23,11 +24,20 @@ function formatTime(s: number) {
 }
 
 export function FocusTimer() {
+  const { focusDuration } = usePreferences()
   const [mode, setMode] = React.useState<Mode>('focus')
   const [running, setRunning] = React.useState(false)
-  const [remaining, setRemaining] = React.useState(FOCUS_SECONDS)
+  const focusSeconds = focusDuration * 60
+  const [remaining, setRemaining] = React.useState(DEFAULT_FOCUS_SECONDS)
 
-  const total = mode === 'focus' ? FOCUS_SECONDS : BREAK_SECONDS
+  React.useEffect(() => {
+    // If user changes focus duration, reset the focus timer (break stays 5 min).
+    setRunning(false)
+    setMode('focus')
+    setRemaining(focusSeconds)
+  }, [focusSeconds])
+
+  const total = mode === 'focus' ? focusSeconds : BREAK_SECONDS
   const progress = 1 - remaining / total
 
   useInterval(
@@ -36,7 +46,7 @@ export function FocusTimer() {
         if (r <= 1) {
           const nextMode: Mode = mode === 'focus' ? 'break' : 'focus'
           setMode(nextMode)
-          return nextMode === 'focus' ? FOCUS_SECONDS : BREAK_SECONDS
+          return nextMode === 'focus' ? focusSeconds : BREAK_SECONDS
         }
         return r - 1
       })
@@ -51,7 +61,7 @@ export function FocusTimer() {
   const reset = () => {
     setRunning(false)
     setMode('focus')
-    setRemaining(FOCUS_SECONDS)
+    setRemaining(focusSeconds)
   }
 
   return (
@@ -60,7 +70,7 @@ export function FocusTimer() {
         <CardTitle className="flex items-center justify-between">
           <span>Focus Mode</span>
           <span className="text-xs font-medium text-muted">
-            {mode === 'focus' ? '25 min focus' : '5 min break'}
+            {mode === 'focus' ? `${focusDuration} min focus` : '5 min break'}
           </span>
         </CardTitle>
       </CardHeader>

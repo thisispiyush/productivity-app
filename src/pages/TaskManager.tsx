@@ -18,6 +18,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useProductivityStore } from '@/hooks/useProductivityStore'
+import { usePreferences } from '@/hooks/usePreferences'
 import type { Priority, Task } from '@/utils/types'
 import { cn } from '@/utils/cn'
 
@@ -57,6 +58,7 @@ function SortableTaskRow({
 
 export function TaskManagerPage() {
   const { tasks, toggleTask, reorderTasks, addTask, updateTask, deleteTask } = useProductivityStore()
+  const { defaultTaskPriority, showCompletedTasks } = usePreferences()
   const [open, setOpen] = React.useState(false)
   const [editing, setEditing] = React.useState<Task | null>(null)
 
@@ -82,7 +84,7 @@ export function TaskManagerPage() {
   const startCreate = () => {
     setEditing(null)
     setTitle('')
-    setPriority('Medium')
+    setPriority(defaultTaskPriority)
     setDueDateISO('')
     setOpen(true)
   }
@@ -180,6 +182,7 @@ export function TaskManagerPage() {
             </DndContext>
           </div>
 
+          {showCompletedTasks ? (
           <div className="space-y-3">
             <div className="text-xs font-medium text-muted">Done</div>
             <div className="space-y-3">
@@ -199,6 +202,7 @@ export function TaskManagerPage() {
               ) : null}
             </div>
           </div>
+          ) : null}
         </div>
       )}
 
