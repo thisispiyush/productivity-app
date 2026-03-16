@@ -129,6 +129,7 @@ export function SettingsPage() {
         'pulse.pref.defaultTaskPriority',
         'pulse.pref.showCompletedTasks',
         'pulse.pref.focusDuration',
+        'pulse-display-name',
         'pulse-profile.name',
         'pulse-profile.avatar',
       ]
@@ -362,4 +363,3 @@ export function SettingsPage() {
     </div>
   )
 }
-

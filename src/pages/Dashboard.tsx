@@ -9,11 +9,22 @@ import { StatCard } from '@/components/StatCard'
 import { Card, CardContent } from '@/components/ui/card'
 import { useProductivityStore } from '@/hooks/useProductivityStore'
 import { useStreak } from '@/hooks/useStreak'
+import { useUser } from '@/hooks/useUser'
 import { daysBack, formatISODate, startOfDay, startOfWeek } from '@/utils/dates'
 import { getMotivationMessage } from '@/utils/motivation'
 
+function getGreeting() {
+  const hour = new Date().getHours()
+  if (hour < 12) return 'Good Morning'
+  if (hour < 17) return 'Good Afternoon'
+  if (hour < 21) return 'Good Evening'
+  return 'Good Night'
+}
+
 export function DashboardPage() {
-  const greeting = 'Good Evening, Piyush 👋'
+  const { displayName } = useUser()
+  const greeting = `${getGreeting()}, ${displayName} \u{1F44B}`
+
   const { habits, tasks } = useProductivityStore()
   const { streak, milestone, bumped } = useStreak()
 

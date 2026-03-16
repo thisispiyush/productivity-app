@@ -4,6 +4,7 @@ import { Pencil, Upload } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useAuth } from '@/hooks/useAuth'
 import { useLocalStorageState } from '@/hooks/useLocalStorage'
+import { useUser } from '@/hooks/useUser'
 import { useProductivityStore } from '@/hooks/useProductivityStore'
 import { useStreak } from '@/hooks/useStreak'
 import { formatISODate, startOfDay } from '@/utils/dates'
@@ -26,6 +27,7 @@ export function ProfilePage() {
   const { user } = useAuth()
   const { habits, tasks } = useProductivityStore()
   const { streak } = useStreak()
+  const { displayName, updateName } = useUser()
 
   const defaultName = React.useMemo(() => {
     const email = user?.email ?? ''
@@ -33,14 +35,13 @@ export function ProfilePage() {
     return base ? base.replace(/[._-]+/g, ' ') : 'Pulse User'
   }, [user?.email])
 
-  const [displayName, setDisplayName] = useLocalStorageState<string>('pulse-profile.name', defaultName)
   const [avatarDataUrl, setAvatarDataUrl] = useLocalStorageState<string | null>('pulse-profile.avatar', null)
   const [editing, setEditing] = React.useState(false)
-  const [draftName, setDraftName] = React.useState(displayName)
+  const [draftName, setDraftName] = React.useState(displayName || defaultName)
 
   React.useEffect(() => {
-    if (!editing) setDraftName(displayName)
-  }, [displayName, editing])
+    if (!editing) setDraftName(displayName || defaultName)
+  }, [displayName, defaultName, editing])
 
   const uploadRef = React.useRef<HTMLInputElement | null>(null)
 
@@ -59,7 +60,7 @@ export function ProfilePage() {
 
   const saveName = () => {
     const next = draftName.trim()
-    setDisplayName(next || defaultName)
+    void updateName(next || defaultName)
     setEditing(false)
   }
 
@@ -208,4 +209,3 @@ export function ProfilePage() {
     </div>
   )
 }
-

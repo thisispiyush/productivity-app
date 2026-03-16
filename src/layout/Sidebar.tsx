@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import { BarChart3, CheckSquare, Flame, LayoutDashboard } from 'lucide-react'
 
 import { cn } from '@/utils/cn'
+import { EKGIcon } from '@/components/icons/EKGIcon'
 
 const nav = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard },
@@ -13,9 +14,9 @@ const nav = [
 export function Sidebar() {
   return (
     <aside className="fixed inset-y-0 left-0 z-40 hidden w-72 border-r border-border bg-card px-4 py-5 shadow-[var(--shadow-sidebar)] md:block">
-      <div className="flex items-center gap-3 px-2">
-        <div className="relative grid h-10 w-10 place-items-center rounded-2xl border border-border bg-surface">
-          <div className="h-2.5 w-2.5 rounded-full bg-accentBlue shadow-[0_0_18px_rgba(79,124,255,0.55)]" />
+      <div className="flex items-center gap-3 px-4 py-5 border-b border-border">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-accentBlue/20 bg-accentBlue/10 text-accentBlue">
+          <EKGIcon className="h-5 w-5 drop-shadow-[0_0_6px_rgba(79,110,247,0.55)]" />
         </div>
         <div className="leading-tight">
           <div className="text-sm font-semibold tracking-tight">Pulse</div>

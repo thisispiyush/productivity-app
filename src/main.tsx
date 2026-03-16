@@ -10,6 +10,7 @@ import { AuthProvider } from '@/hooks/useAuth'
 import { ProductivityStoreProvider } from '@/hooks/useProductivityStore'
 import { ThemeProvider } from '@/hooks/useTheme'
 import { PreferencesProvider } from '@/hooks/usePreferences'
+import { UserProvider } from '@/hooks/useUser'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -17,9 +18,11 @@ createRoot(document.getElementById('root')!).render(
       <PreferencesProvider>
         <StartupErrorsProvider>
           <AuthProvider>
-            <ProductivityStoreProvider>
-              <App />
-            </ProductivityStoreProvider>
+            <UserProvider>
+              <ProductivityStoreProvider>
+                <App />
+              </ProductivityStoreProvider>
+            </UserProvider>
           </AuthProvider>
         </StartupErrorsProvider>
       </PreferencesProvider>
