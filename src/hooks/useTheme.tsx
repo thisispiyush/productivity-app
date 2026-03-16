@@ -39,9 +39,6 @@ function applyThemeToDOM(theme: Theme) {
   }
   root.classList.toggle('dark', theme === 'dark')
   root.classList.toggle('light', theme === 'light')
-
-  const meta = document.querySelector?.('meta[name="theme-color"]')
-  if (meta) meta.setAttribute('content', theme === 'dark' ? '#000000' : '#F4F4F5')
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
