@@ -13,9 +13,16 @@ export function AppLayout() {
     <div className="min-h-full bg-background">
       <Sidebar />
       <main className="min-h-full overflow-x-hidden md:pl-72">
-        <div className="mx-auto max-w-6xl px-4 pb-24 pt-4 md:px-6 md:pb-8 md:pt-6 lg:px-8 lg:py-8">
-          <TopNav />
-          <StartupErrorBanner />
+        <div className="fixed left-0 right-0 top-0 z-50 md:left-72">
+          <div className="mx-auto max-w-6xl px-4 py-3 md:px-6 lg:px-8">
+            <TopNav />
+          </div>
+        </div>
+
+        <div className="mx-auto max-w-6xl px-4 pb-24 pt-24 md:px-6 md:pb-8 md:pt-24 lg:px-8 lg:pb-8">
+          <div className="relative z-0">
+            <StartupErrorBanner />
+          </div>
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}

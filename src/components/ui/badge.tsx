@@ -12,9 +12,10 @@ const badgeVariants = cva(
         blue: 'bg-accentBlue/15 text-accentBlue border-accentBlue/25',
         purple: 'bg-accentPurple/15 text-accentPurple border-accentPurple/25',
         green: 'bg-accentGreen/15 text-accentGreen border-accentGreen/25',
-        high: 'bg-accentPurple/15 text-accentPurple border-accentPurple/25',
-        medium: 'bg-accentBlue/15 text-accentBlue border-accentBlue/25',
-        low: 'bg-surface text-muted',
+        low: 'border-green-200 bg-green-50 text-green-700 dark:border-green-800 dark:bg-green-900/30 dark:text-green-400',
+        medium:
+          'border-yellow-200 bg-yellow-50 text-yellow-700 dark:border-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
+        high: 'border-red-200 bg-red-50 text-red-700 dark:border-red-800 dark:bg-red-900/30 dark:text-red-400',
       },
     },
     defaultVariants: {

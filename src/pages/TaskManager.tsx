@@ -9,7 +9,7 @@ import {
 } from '@dnd-kit/core'
 import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { Plus } from 'lucide-react'
+import { ClipboardList, Plus } from 'lucide-react'
 
 import { TaskCard } from '@/components/TaskCard'
 import { Button } from '@/components/ui/button'
@@ -139,12 +139,21 @@ export function TaskManagerPage() {
       </Card>
 
       {tasks.length === 0 ? (
-        <div className="rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-card)] md:p-6">
-          <div className="rounded-2xl border border-border bg-surface p-4 md:p-6">
-            <div className="text-sm font-medium">No tasks yet.</div>
-            <div className="mt-1 text-sm text-muted">Start small and add your first task.</div>
-          </div>
-        </div>
+        <Card className="overflow-hidden">
+          <CardContent className="flex flex-col items-center justify-center gap-4 p-8 text-center md:p-10">
+            <div className="grid h-12 w-12 place-items-center rounded-2xl border border-border bg-surface text-muted">
+              <ClipboardList className="h-6 w-6" />
+            </div>
+            <div>
+              <div className="text-base font-semibold">No tasks yet</div>
+              <div className="mt-1 text-sm text-muted">Start small. One task at a time.</div>
+            </div>
+            <Button variant="blue" ripple onClick={startCreate} className="min-h-[44px] rounded-2xl">
+              <Plus className="h-4 w-4" />
+              Add your first task
+            </Button>
+          </CardContent>
+        </Card>
       ) : (
         <div className="space-y-6 rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-card)] md:p-6">
           <div className="space-y-3">

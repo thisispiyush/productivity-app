@@ -5,6 +5,7 @@ export type Habit = {
   name: string
   icon: 'Flame' | 'Dumbbell' | 'BookOpen' | 'Droplets' | 'Brain' | 'Leaf'
   completions: Record<string, boolean>
+  color: string
 }
 
 export type Task = {

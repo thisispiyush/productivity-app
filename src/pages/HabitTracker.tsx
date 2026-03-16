@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Plus, Sparkles } from 'lucide-react'
+import { Flame, Plus, Sparkles } from 'lucide-react'
 
 import { HabitCard } from '@/components/HabitCard'
 import { Button } from '@/components/ui/button'
@@ -94,17 +94,18 @@ export function HabitTrackerPage() {
       </div>
 
       {habits.length === 0 ? (
-        <Card className="border-dashed">
-          <CardContent className="flex flex-col items-start gap-3 p-6 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <div className="text-sm font-semibold">Start building your habits</div>
-              <div className="mt-1 text-sm text-muted">
-                Create a simple daily habit to see your grid come to life.
-              </div>
+        <Card className="overflow-hidden">
+          <CardContent className="flex flex-col items-center justify-center gap-4 p-8 text-center md:p-10">
+            <div className="grid h-12 w-12 place-items-center rounded-2xl border border-border bg-surface text-muted">
+              <Flame className="h-6 w-6" />
             </div>
-            <Button variant="blue" ripple onClick={startCreate}>
+            <div>
+              <div className="text-base font-semibold">No habits yet</div>
+              <div className="mt-1 text-sm text-muted">Consistency beats perfection.</div>
+            </div>
+            <Button variant="blue" ripple onClick={startCreate} className="min-h-[44px] rounded-2xl">
               <Plus className="h-4 w-4" />
-              New habit
+              Create your first habit
             </Button>
           </CardContent>
         </Card>

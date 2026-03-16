@@ -5,6 +5,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { useStartupErrors } from '@/hooks/useStartupErrors'
 import { supabase } from '@/lib/supabaseClient'
 import { formatISODate, startOfDay } from '@/utils/dates'
+import { habitColorFromId } from '@/utils/habitColors'
 import type { Habit, Priority, Task } from '@/utils/types'
 
 type StoreState = {
@@ -57,6 +58,7 @@ function mapHabit(row: HabitRow): Habit {
     name: row.name,
     icon: row.icon,
     completions: row.completions ?? {},
+    color: habitColorFromId(row.id),
   }
 }
 

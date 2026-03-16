@@ -89,7 +89,7 @@ export function HabitCard({
   }, [habit.id, habit.completions])
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden border-l-4" style={{ borderLeftColor: habit.color }}>
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
@@ -99,7 +99,8 @@ export function HabitCard({
             <div>
               <CardTitle className="text-base">{habit.name}</CardTitle>
               <div className="mt-1 text-xs text-muted">
-                <span className="text-accentGreen">●</span> {streak} day streak
+                <span className="mr-1 inline-block h-2 w-2 rounded-full align-middle" style={{ backgroundColor: habit.color }} />{' '}
+                {streak} day streak
               </div>
             </div>
           </div>
@@ -134,7 +135,7 @@ export function HabitCard({
                   const hover = 'hover:shadow-[0_0_0_3px_rgba(79,124,255,0.16)]'
                   const defaultBg = 'bg-gray-200 dark:bg-neutral-800'
                   const todayBg = 'bg-gray-300 dark:bg-neutral-700'
-                  const completedBg = 'bg-green-500'
+                  const completedBg = ''
                   const todayBorder = 'border-blue-500 dark:border-blue-400'
 
                   const cls = cn(
@@ -152,6 +153,7 @@ export function HabitCard({
                           type="button"
                           aria-label={`${habit.name} on ${iso}`}
                           className={cls}
+                          style={done ? { backgroundColor: habit.color } : undefined}
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 1.1 }}
                           transition={{ duration: 0.2, ease: 'easeOut' }}
@@ -176,9 +178,10 @@ export function HabitCard({
 
           <div className="flex flex-col items-end gap-2">
             <Button
-              variant={doneToday ? 'secondary' : 'green'}
+              variant="secondary"
               ripple
-              className={cn(doneToday && 'border border-border')}
+              className={cn(doneToday ? 'border border-border' : 'text-white hover:opacity-90')}
+              style={doneToday ? undefined : { backgroundColor: habit.color, borderColor: 'transparent' }}
               onClick={() => onToggleToday(!doneToday)}
             >
               {doneToday ? 'Completed' : 'Mark today'}

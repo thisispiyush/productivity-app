@@ -20,10 +20,6 @@ export function ProfilePage() {
             <div className="text-sm text-muted">Email</div>
             <div className="text-sm font-medium">{user?.email ?? 'Unknown'}</div>
           </div>
-          <div className="flex items-center justify-between gap-4">
-            <div className="text-sm text-muted">User ID</div>
-            <div className="text-sm font-medium">{user?.id ?? 'Unknown'}</div>
-          </div>
         </CardContent>
       </Card>
     </div>

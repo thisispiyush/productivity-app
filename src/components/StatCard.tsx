@@ -14,11 +14,13 @@ export function StatCard({
   value: React.ReactNode
   subtitle?: string
   icon: LucideIcon
-  accent?: 'blue' | 'purple' | 'green'
+  accent?: 'blue' | 'purple' | 'green' | 'orange'
 }) {
   const ring =
     accent === 'green'
       ? 'ring-accentGreen/20 hover:shadow-glowGreen'
+      : accent === 'orange'
+        ? 'ring-orange-500/20 hover:shadow-glow'
       : accent === 'purple'
         ? 'ring-accentPurple/20 hover:shadow-glow'
         : 'ring-accentBlue/20 hover:shadow-glow'
@@ -26,6 +28,8 @@ export function StatCard({
   const dot =
     accent === 'green'
       ? 'bg-accentGreen'
+      : accent === 'orange'
+        ? 'bg-orange-500'
       : accent === 'purple'
         ? 'bg-accentPurple'
         : 'bg-accentBlue'
@@ -37,7 +41,7 @@ export function StatCard({
         <div className="flex items-start justify-between gap-3">
           <div>
             <div className="text-xs font-medium text-muted">{title}</div>
-            <div className="mt-2 text-2xl font-semibold tracking-tight">{value}</div>
+            <div className="mt-2 text-xl font-semibold tracking-tight md:text-2xl">{value}</div>
             {subtitle ? <div className="mt-1 text-xs text-muted">{subtitle}</div> : null}
           </div>
           <div className="grid h-10 w-10 place-items-center rounded-2xl border border-border bg-surface">

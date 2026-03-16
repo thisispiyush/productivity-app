@@ -188,7 +188,7 @@ export function AuthPage() {
                 disabled={oauthLoading}
                 className={[
                   buttonBase(),
-                  'border border-gray-200 bg-white text-slate-900 hover:bg-gray-50',
+                  'border border-gray-300 bg-white text-slate-900 shadow-[0_1px_4px_rgba(0,0,0,0.08)] hover:border-gray-400 hover:bg-[#F9FAFB]',
                   'dark:border-[#333] dark:bg-[#1e1e1e] dark:text-white dark:hover:bg-[#2a2a2a]',
                 ].join(' ')}
               >
