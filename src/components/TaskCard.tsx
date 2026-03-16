@@ -56,7 +56,7 @@ export function TaskCard({
           type="checkbox"
           checked={task.completed}
           onChange={(e) => onToggle(e.target.checked)}
-          className="h-4 w-4 rounded border-border bg-surface text-blue-500 focus:ring-blue-500 focus:ring-offset-background"
+          className="h-5 w-5 rounded border-border bg-surface text-blue-500 focus:ring-blue-500 focus:ring-offset-background"
         />
 
         <div className="min-w-0 flex-1">

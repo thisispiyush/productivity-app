@@ -82,7 +82,7 @@ export function AnalyticsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <div className="text-2xl font-semibold tracking-tight">Analytics</div>
+        <div className="text-2xl font-semibold tracking-tight md:text-3xl">Analytics</div>
         <div className="mt-2 text-sm text-muted">Minimal, dark, and honest — trends over time.</div>
       </div>
 
@@ -92,7 +92,7 @@ export function AnalyticsPage() {
             <CardTitle>Habit streak trends</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-64" onPointerDownCapture={blurRechartsFocus}>
+            <div className="h-56 md:h-64" onPointerDownCapture={blurRechartsFocus}>
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={habitTrend} margin={{ left: 6, right: 18, top: 8, bottom: 0 }}>
                   <CartesianGrid stroke="var(--chart-grid)" vertical={false} />
@@ -111,7 +111,7 @@ export function AnalyticsPage() {
             <CardTitle>Task completion trends</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-64" onPointerDownCapture={blurRechartsFocus}>
+            <div className="h-56 md:h-64" onPointerDownCapture={blurRechartsFocus}>
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={taskTrend} margin={{ left: 6, right: 18, top: 8, bottom: 0 }}>
                   <CartesianGrid stroke="var(--chart-grid)" vertical={false} />
@@ -121,7 +121,7 @@ export function AnalyticsPage() {
                   <Area
                     type="monotone"
                     dataKey="done"
-                    stroke="#4F7CFF"
+                    stroke="#4F6EF7"
                     fill="rgba(79,124,255,0.20)"
                     strokeWidth={2.5}
                   />
@@ -135,13 +135,13 @@ export function AnalyticsPage() {
       <Card className="overflow-hidden">
         <CardHeader className="pb-2">
           <CardTitle>Weekly productivity score</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="h-72" onPointerDownCapture={blurRechartsFocus}>
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={productivity} margin={{ left: 6, right: 18, top: 8, bottom: 0 }}>
-              <CartesianGrid stroke="var(--chart-grid)" vertical={false} />
-              <XAxis dataKey="label" tick={{ fill: 'var(--chart-tick)', fontSize: 12 }} axisLine={false} tickLine={false} />
+        </CardHeader>
+        <CardContent>
+          <div className="h-64 md:h-72" onPointerDownCapture={blurRechartsFocus}>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={productivity} margin={{ left: 6, right: 18, top: 8, bottom: 0 }}>
+                <CartesianGrid stroke="var(--chart-grid)" vertical={false} />
+                <XAxis dataKey="label" tick={{ fill: 'var(--chart-tick)', fontSize: 12 }} axisLine={false} tickLine={false} />
                 <YAxis domain={[0, 100]} tick={{ fill: 'var(--chart-tick)', fontSize: 12 }} axisLine={false} tickLine={false} />
                 <Tooltip {...tooltipStyle()} />
                 <Bar dataKey="score" radius={[12, 12, 12, 12]} fill="rgba(139,92,246,0.85)" />

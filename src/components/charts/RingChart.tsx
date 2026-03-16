@@ -19,7 +19,7 @@ export function RingChart({
     { name: 'rest', value: Math.max(0, 100 - pct) },
   ]
 
-  const fill = color === 'green' ? '#22C55E' : color === 'purple' ? '#8B5CF6' : '#4F7CFF'
+  const fill = color === 'green' ? '#22C55E' : color === 'purple' ? '#8B5CF6' : '#4F6EF7'
   const bg = 'var(--chart-ring-bg)'
 
   const blurRechartsFocus = () => {
@@ -39,7 +39,7 @@ export function RingChart({
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-4">
-        <div className="h-44" onPointerDownCapture={blurRechartsFocus}>
+        <div className="h-40 md:h-44" onPointerDownCapture={blurRechartsFocus}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie

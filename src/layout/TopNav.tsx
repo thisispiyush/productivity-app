@@ -25,11 +25,11 @@ export function TopNav() {
   const [menuOpen, setMenuOpen] = React.useState(false)
 
   return (
-    <div className="sticky top-0 z-30 -mx-8 mb-6 px-8 pt-6">
-      <div className="glass flex items-center justify-between rounded-2xl px-4 py-3">
+    <div className="sticky top-0 z-30 -mx-4 mb-4 px-4 pt-2 md:-mx-6 md:mb-6 md:px-6 md:pt-3 lg:-mx-8 lg:px-8">
+      <div className="glass flex items-center justify-between gap-3 rounded-2xl px-3 py-2 md:px-4 md:py-3">
         <div className="min-w-0">
-          <div className="truncate text-sm font-semibold tracking-tight">{title}</div>
-          <div className="mt-0.5 truncate text-xs text-muted">Minimal. Calm. Addictive.</div>
+          <div className="truncate text-xs font-semibold tracking-tight md:text-sm">{title}</div>
+          <div className="mt-0.5 hidden truncate text-xs text-muted sm:block">Minimal. Calm. Addictive.</div>
         </div>
 
         <div className="relative flex items-center gap-2">

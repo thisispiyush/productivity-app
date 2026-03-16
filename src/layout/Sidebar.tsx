@@ -12,7 +12,7 @@ const nav = [
 
 export function Sidebar() {
   return (
-    <aside className="glass fixed inset-y-0 left-0 z-40 w-72 px-4 py-5">
+    <aside className="glass fixed inset-y-0 left-0 z-40 hidden w-72 px-4 py-5 md:block">
       <div className="flex items-center gap-3 px-2">
         <div className="relative grid h-10 w-10 place-items-center rounded-2xl border border-border bg-surface">
           <div className="h-2.5 w-2.5 rounded-full bg-accentBlue shadow-[0_0_18px_rgba(79,124,255,0.55)]" />

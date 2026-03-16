@@ -46,14 +46,14 @@ export function HabitTrackerPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-end justify-between gap-4">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <div className="text-2xl font-semibold tracking-tight">Habit Tracker</div>
+          <div className="text-2xl font-semibold tracking-tight md:text-3xl">Habit Tracker</div>
           <div className="mt-2 text-sm text-muted">
             A calm contribution grid — click squares to log progress.
           </div>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <Card className="hidden sm:block">
             <CardContent className="flex items-center gap-2 p-4 text-sm text-muted">
               <Sparkles className="h-4 w-4 text-accentBlue" />

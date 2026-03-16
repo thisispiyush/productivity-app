@@ -115,12 +115,12 @@ export function TaskManagerPage() {
   return (
     <div className="space-y-6">
       <div>
-        <div className="text-2xl font-semibold tracking-tight">Task Manager</div>
+        <div className="text-2xl font-semibold tracking-tight md:text-3xl">Task Manager</div>
         <div className="mt-2 text-sm text-muted">Drag to reorder. Keep the list small and sharp.</div>
       </div>
 
       <Card>
-        <CardContent className="p-6">
+        <CardContent className="p-4 md:p-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <div className="text-sm font-semibold tracking-tight">
@@ -130,7 +130,7 @@ export function TaskManagerPage() {
                 {tasks.length === 0 ? 'Start small. Capture one clear next step.' : 'Add one task. Finish it. Repeat.'}
               </div>
             </div>
-            <Button variant="blue" ripple onClick={startCreate} className="rounded-2xl">
+            <Button variant="blue" ripple onClick={startCreate} className="rounded-2xl min-h-[44px]">
               <Plus className="h-4 w-4" />
               Add Task
             </Button>
@@ -139,14 +139,14 @@ export function TaskManagerPage() {
       </Card>
 
       {tasks.length === 0 ? (
-        <div className="rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
-          <div className="rounded-2xl border border-border bg-surface p-6">
+        <div className="rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-card)] md:p-6">
+          <div className="rounded-2xl border border-border bg-surface p-4 md:p-6">
             <div className="text-sm font-medium">No tasks yet.</div>
             <div className="mt-1 text-sm text-muted">Start small and add your first task.</div>
           </div>
         </div>
       ) : (
-        <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
+        <div className="space-y-6 rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-card)] md:p-6">
           <div className="space-y-3">
             <div className="text-xs font-medium text-muted">In Progress</div>
             <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>

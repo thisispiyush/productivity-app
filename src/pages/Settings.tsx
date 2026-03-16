@@ -26,7 +26,7 @@ export function SettingsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <div className="text-2xl font-semibold tracking-tight">Settings</div>
+        <div className="text-2xl font-semibold tracking-tight md:text-3xl">Settings</div>
         <div className="mt-2 text-sm text-muted">Account and preferences.</div>
       </div>
 

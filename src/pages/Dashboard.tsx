@@ -59,11 +59,11 @@ export function DashboardPage() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <div className="text-3xl font-semibold tracking-tight">{greeting}</div>
-        <div className="text-sm text-muted max-w-md">{message}</div>
+        <div className="text-2xl font-semibold tracking-tight md:text-3xl">{greeting}</div>
+        <div className="max-w-md text-sm text-muted md:text-base">{message}</div>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 md:gap-6 lg:grid-cols-4">
         <StatCard
           title="Habits Completed"
           value={`${habitsDoneToday}/${habits.length}`}

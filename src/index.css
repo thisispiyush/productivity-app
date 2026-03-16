@@ -87,6 +87,7 @@
     transition:
       background-color 240ms ease,
       color 240ms ease;
+    overflow-x: hidden;
   }
 
   @media (prefers-reduced-motion: no-preference) {

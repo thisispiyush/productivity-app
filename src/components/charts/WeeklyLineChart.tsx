@@ -28,7 +28,7 @@ export function WeeklyLineChart({ data }: { data: Point[] }) {
         <CardTitle>Weekly Productivity</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="h-64" onPointerDownCapture={blurRechartsFocus}>
+        <div className="h-56 md:h-64" onPointerDownCapture={blurRechartsFocus}>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={data} margin={{ left: 6, right: 18, top: 8, bottom: 0 }}>
               <CartesianGrid stroke="var(--chart-grid)" vertical={false} />
@@ -57,7 +57,7 @@ export function WeeklyLineChart({ data }: { data: Point[] }) {
               <Line
                 type="monotone"
                 dataKey="score"
-                stroke="#4F7CFF"
+                stroke="#4F6EF7"
                 strokeWidth={2.5}
                 dot={false}
                 activeDot={{ r: 4 }}

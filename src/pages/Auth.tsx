@@ -19,7 +19,7 @@ function routeForMode(mode: Mode) {
 
 function fieldBase() {
   return [
-    'h-11 w-full rounded-xl px-3 text-sm',
+    'h-12 w-full rounded-xl px-3 text-sm',
     'bg-surface text-foreground placeholder:text-muted',
     'border border-border',
     'transition-all duration-200',
@@ -29,7 +29,7 @@ function fieldBase() {
 
 function buttonBase() {
   return [
-    'h-11 w-full rounded-xl text-sm font-medium',
+    'min-h-[48px] w-full rounded-xl text-sm font-medium',
     'transition-all duration-200',
     'focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F6EF7]/35 focus-visible:ring-offset-0',
     'disabled:opacity-60 disabled:cursor-not-allowed',
@@ -131,7 +131,7 @@ export function AuthPage() {
 
   return (
     <div className="relative w-full">
-      <div className="mx-auto w-full max-w-md">
+      <div className="mx-auto w-full max-w-md px-4 sm:px-0">
         <div className="rounded-2xl border border-border bg-card p-1 shadow-[0_4px_24px_rgba(0,0,0,0.08)] dark:shadow-[0_0_40px_rgba(0,0,0,0.6)]">
           <div className="relative grid grid-cols-2 gap-1 rounded-xl border border-border bg-background p-1">
             <div
@@ -147,7 +147,7 @@ export function AuthPage() {
               type="button"
               onClick={() => onTab('signin')}
               className={[
-                'relative z-10 h-10 rounded-lg text-sm transition-colors',
+                'relative z-10 h-11 w-full rounded-lg text-sm transition-colors',
                 mode === 'signin'
                   ? 'font-semibold text-foreground dark:text-white'
                   : 'text-muted dark:text-gray-400 hover:text-foreground dark:hover:text-white',
@@ -160,7 +160,7 @@ export function AuthPage() {
               type="button"
               onClick={() => onTab('signup')}
               className={[
-                'relative z-10 h-10 rounded-lg text-sm transition-colors',
+                'relative z-10 h-11 w-full rounded-lg text-sm transition-colors',
                 mode === 'signup'
                   ? 'font-semibold text-foreground dark:text-white'
                   : 'text-muted dark:text-gray-400 hover:text-foreground dark:hover:text-white',
