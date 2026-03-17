@@ -1,52 +1,37 @@
-# Pulse — Productivity OS
-# Productivity Tracker Web App
+# Pulse — Productivity Tracker
 
-A modern productivity web application that helps users track habits, manage tasks, and analyse productivity patterns.
+A simple productivity web app to manage tasks and track daily habits.
+
+---
 
 ## Features
 
-- User authentication (login/signup)
-- Habit tracking system
-- Task manager
-- Productivity analytics dashboard
+- User authentication (Email + Google login)
+- Task management (add, delete, complete)
+- Habit tracking
 - Dark / Light mode
 - Focus timer
 
+---
+
 ## Tech Stack
 
-Frontend:
-- React
-- Tailwind CSS
-- Vite
+- Frontend: React, Tailwind CSS, Vite  
+- Backend: Supabase (Auth + Database)  
+- Deployment: Vercel  
 
-Backend:
-- Supabase (Authentication + Database)
-
-Deployment:
-- Vercel
+---
 
 ## Live Demo
 
-https://your-app-link.vercel.app
+https://v0-productivity-app-zeta-eight.vercel.app/
 
-## How to Run Locally
+---
 
-1. Clone the repository
+## Run Locally
 
+```bash
 git clone https://github.com/yourusername/project-name
-
-2. Install dependencies
-
+cd project-name
 npm install
-
-3. Start development server
-
 npm run dev
-
-## Screenshots
-
-(Add screenshots of your dashboard, habit tracker, analytics etc.)
-
-## Author
-
-Piyush Chaudhary
