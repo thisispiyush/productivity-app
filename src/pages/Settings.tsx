@@ -13,9 +13,9 @@ import { useTheme } from '@/hooks/useTheme'
 import type { Priority } from '@/utils/types'
 import { supabase } from '@/lib/supabaseClient'
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function SectionLabel({ id, children }: { id?: string; children: React.ReactNode }) {
   return (
-    <p className="mb-3 mt-6 text-xs font-semibold uppercase tracking-wider text-muted">
+    <p id={id} className="mb-3 mt-6 scroll-mt-20 text-xs font-semibold uppercase tracking-wider text-muted">
       {children}
     </p>
   )
@@ -161,7 +161,7 @@ export function SettingsPage() {
         <div className="mt-2 text-sm text-muted">Appearance, preferences, and account.</div>
       </div>
 
-      <SectionLabel>Appearance</SectionLabel>
+      <SectionLabel id="appearance">Appearance</SectionLabel>
       <Card className="overflow-hidden">
         <CardHeader className="pb-2">
           <CardTitle>Appearance</CardTitle>
@@ -187,7 +187,7 @@ export function SettingsPage() {
         </CardContent>
       </Card>
 
-      <SectionLabel>Preferences</SectionLabel>
+      <SectionLabel id="preferences">Preferences</SectionLabel>
       <Card className="overflow-hidden">
         <CardHeader className="pb-2">
           <CardTitle>Preferences</CardTitle>
@@ -234,7 +234,7 @@ export function SettingsPage() {
         </CardContent>
       </Card>
 
-      <SectionLabel>Data & Privacy</SectionLabel>
+      <SectionLabel id="data">Data & Privacy</SectionLabel>
       <Card className="overflow-hidden">
         <CardHeader className="pb-2">
           <CardTitle>Data & Privacy</CardTitle>
@@ -268,7 +268,7 @@ export function SettingsPage() {
         </CardContent>
       </Card>
 
-      <SectionLabel>Account Control</SectionLabel>
+      <SectionLabel id="account">Account Control</SectionLabel>
       <Card className="overflow-hidden">
         <CardHeader className="pb-2">
           <CardTitle>Account Control</CardTitle>

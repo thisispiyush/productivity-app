@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Pencil, Upload } from 'lucide-react'
 
+import { Avatar } from '@/components/Avatar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useAuth } from '@/hooks/useAuth'
 import { useLocalStorageState } from '@/hooks/useLocalStorage'
@@ -14,13 +15,6 @@ function monthYear(iso?: string) {
   const dt = new Date(iso)
   if (Number.isNaN(dt.getTime())) return 'Unknown'
   return dt.toLocaleDateString(undefined, { month: 'long', year: 'numeric' })
-}
-
-function initialsFrom(name: string) {
-  const parts = name.trim().split(/\s+/).filter(Boolean)
-  if (parts.length === 0) return '?'
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase()
-  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
 }
 
 export function ProfilePage() {
@@ -85,7 +79,7 @@ export function ProfilePage() {
     <div className="space-y-6">
       <div>
         <div className="text-2xl font-semibold tracking-tight md:text-3xl">Profile</div>
-        <div className="mt-2 text-sm text-muted">Your account, cleanly summarized.</div>
+        <div className="mt-2 text-sm text-muted">Your account details.</div>
       </div>
 
       <Card className="overflow-hidden">
@@ -94,14 +88,10 @@ export function ProfilePage() {
             <button
               type="button"
               onClick={onPickAvatar}
-              className="group relative grid h-14 w-14 place-items-center overflow-hidden rounded-full border border-border bg-surface text-sm font-semibold text-foreground transition-colors hover:bg-[var(--surface-hover)]"
+              className="group relative grid h-14 w-14 place-items-center overflow-hidden rounded-xl border border-border bg-surface text-sm font-semibold text-foreground transition-colors hover:bg-[var(--surface-hover)]"
               aria-label="Upload profile photo"
             >
-              {avatarDataUrl ? (
-                <img src={avatarDataUrl} alt="" className="h-full w-full object-cover" />
-              ) : (
-                <span>{initialsFrom(displayName || defaultName)}</span>
-              )}
+              <Avatar name={displayName || defaultName} photoUrl={avatarDataUrl} size={56} className="rounded-xl" />
               <span className="pointer-events-none absolute inset-0 grid place-items-center bg-black/0 text-white opacity-0 transition-opacity group-hover:bg-black/35 group-hover:opacity-100">
                 <Upload className="h-4 w-4" />
               </span>

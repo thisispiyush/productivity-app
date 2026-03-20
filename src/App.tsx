@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import { AppLayout } from '@/layout/AppLayout'
 import { AuthLayout } from '@/layout/AuthLayout'
+import { SettingsLayout } from '@/layout/SettingsLayout'
 import { AnalyticsPage } from '@/pages/Analytics'
 import { AuthCallbackPage } from '@/pages/AuthCallback'
 import { AuthPage } from '@/pages/Auth'
@@ -45,10 +46,18 @@ export default function App() {
           <Route path="/habits" element={<HabitTrackerPage />} />
           <Route path="/tasks" element={<TaskManagerPage />} />
           <Route path="/analytics" element={<AnalyticsPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/settings" element={<SettingsPage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
+        <Route
+          element={
+            <ProtectedRoute>
+              <SettingsLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   )

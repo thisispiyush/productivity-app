@@ -58,12 +58,14 @@
     --tooltip-border: color-mix(in srgb, var(--border) 70%, transparent);
     --tooltip-label: rgba(161, 161, 170, 0.9);
 
+    --stat-label: #666666;
+
     color-scheme: dark;
   }
 
   html.light {
     /* Light theme */
-    --bg-page: #f0f2f5;
+    --bg-page: #eef0f3;
     --bg-card: #ffffff;
     --bg-card-hover: #fafafa;
     --bg-subtle: #f5f7fa;
@@ -100,8 +102,8 @@
     --glass-shadow: 0 1px 0 rgba(15, 23, 42, 0.02), 0 10px 24px rgba(15, 23, 42, 0.06);
     --glass-blur: none;
 
-    --shadow-card: none;
-    --shadow-card-hover: none;
+    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.06), 0 8px 32px rgba(0, 0, 0, 0.04);
+    --shadow-card-hover: 0 2px 4px rgba(0, 0, 0, 0.07), 0 6px 20px rgba(0, 0, 0, 0.07), 0 12px 40px rgba(0, 0, 0, 0.05);
     --shadow-popover: 0 8px 32px rgba(0, 0, 0, 0.18);
     --shadow-sidebar: 2px 0 8px rgba(0, 0, 0, 0.04);
 
@@ -115,6 +117,8 @@
     --tooltip-bg: var(--bg-card);
     --tooltip-border: var(--border);
     --tooltip-label: rgba(107, 114, 128, 0.95);
+
+    --stat-label: #444444;
 
     color-scheme: light;
   }
@@ -398,5 +402,19 @@
 
   .hover-glow:hover {
     box-shadow: var(--shadow-card-hover);
+  }
+
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--stat-label);
+  }
+
+  .timer-display {
+    font-family: var(--font-sans);
+    font-size: 48px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
   }
 }

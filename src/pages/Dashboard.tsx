@@ -74,13 +74,13 @@ export function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2">
+      <div className="mb-2 pb-7 pt-8 space-y-2">
         <div className="text-[30px] font-bold tracking-[-0.03em] text-[color:var(--text-primary)]">{greeting}</div>
         <div className="-mt-0.5 text-xs text-[color:var(--chart-tick)]">{dateLabel}</div>
         <div className="mt-1 max-w-md text-sm font-normal text-[color:var(--text-muted)]">{message}</div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 md:gap-6 lg:grid-cols-4">
+      <div className="mt-6 grid grid-cols-2 gap-4 md:gap-6 lg:grid-cols-4">
         <StatCard
           title="Habits Completed"
           value={`${habitsDoneToday}/${habits.length}`}
