@@ -48,7 +48,7 @@ export function LoginPage() {
     try {
       const { error: supaError } = await supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: { redirectTo: `${window.location.origin}/` },
+        options: { redirectTo: `${window.location.origin}/auth/callback` },
       })
       if (supaError) setError(supaError.message)
     } finally {

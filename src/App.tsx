@@ -4,6 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AppLayout } from '@/layout/AppLayout'
 import { AuthLayout } from '@/layout/AuthLayout'
 import { AnalyticsPage } from '@/pages/Analytics'
+import { AuthCallbackPage } from '@/pages/AuthCallback'
 import { AuthPage } from '@/pages/Auth'
 import { DashboardPage } from '@/pages/Dashboard'
 import { HabitTrackerPage } from '@/pages/HabitTracker'
@@ -27,6 +28,7 @@ export default function App() {
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="/auth" element={<AuthPage />} />
+          <Route path="/auth/callback" element={<AuthCallbackPage />} />
           <Route path="/login" element={<AuthPage />} />
           <Route path="/signup" element={<AuthPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
