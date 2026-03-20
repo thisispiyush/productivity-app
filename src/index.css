@@ -6,17 +6,24 @@
   :root {
     /* Dark theme (default) */
     --bg-page: #080808;
-    --bg-card: #111111;
+    --bg-card: #141414;
     --bg-card-hover: #161616;
-    --bg-subtle: #1a1a1a;
+    --bg-subtle: #111111;
+    --bg-sidebar: #0d0d0d;
+    --bg-input: #1a1a1a;
+    --bg-header: rgba(8, 8, 8, 0.8);
     --border: rgba(255, 255, 255, 0.06);
-    --border-hover: rgba(255, 255, 255, 0.12);
+    --border-strong: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 255, 255, 0.1);
+    --border-active: rgba(255, 255, 255, 0.14);
     --text-primary: #f0f0f0;
     --text-secondary: #888888;
     --text-muted: #555555;
     --accent: #4f6ef7;
     --accent-hover: #6b85f8;
-    --accent-subtle: rgba(79, 110, 247, 0.1);
+    --accent-subtle: rgba(79, 110, 247, 0.08);
+    --sidebar-hover: rgba(255, 255, 255, 0.04);
+    --sidebar-border: rgba(255, 255, 255, 0.05);
 
     /* Backwards-compatible aliases (Tailwind + existing components) */
     --background: var(--bg-page);
@@ -35,15 +42,15 @@
     --glass-shadow: none;
     --glass-blur: blur(14px);
 
-    --shadow-card: 0 0 0 1px var(--border);
-    --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.12);
-    --shadow-popover: 0 24px 80px rgba(0, 0, 0, 0.4);
+    --shadow-card: none;
+    --shadow-card-hover: none;
+    --shadow-popover: 0 8px 32px rgba(0, 0, 0, 0.5);
     --shadow-sidebar: none;
 
-    --timer-track: rgba(255, 255, 255, 0.08);
+    --timer-track: var(--bg-input);
 
-    --chart-grid: rgba(255, 255, 255, 0.06);
-    --chart-tick: rgba(161, 161, 170, 0.9);
+    --chart-grid: rgba(255, 255, 255, 0.04);
+    --chart-tick: #444444;
     --chart-cursor: rgba(255, 255, 255, 0.06);
     --chart-ring-bg: rgba(255, 255, 255, 0.06);
 
@@ -60,14 +67,21 @@
     --bg-card: #ffffff;
     --bg-card-hover: #fafafa;
     --bg-subtle: #f5f7fa;
+    --bg-sidebar: #ffffff;
+    --bg-input: #f5f7fa;
+    --bg-header: rgba(240, 242, 245, 0.8);
     --border: rgba(0, 0, 0, 0.06);
+    --border-strong: rgba(0, 0, 0, 0.08);
     --border-hover: rgba(0, 0, 0, 0.12);
+    --border-active: rgba(0, 0, 0, 0.14);
     --text-primary: #0a0a0a;
     --text-secondary: #666666;
     --text-muted: #999999;
     --accent: #4f6ef7;
     --accent-hover: #3d5ce6;
     --accent-subtle: rgba(79, 110, 247, 0.08);
+    --sidebar-hover: rgba(0, 0, 0, 0.04);
+    --sidebar-border: rgba(0, 0, 0, 0.06);
 
     /* Backwards-compatible aliases (Tailwind + existing components) */
     --background: var(--bg-page);
@@ -86,15 +100,15 @@
     --glass-shadow: 0 1px 0 rgba(15, 23, 42, 0.02), 0 10px 24px rgba(15, 23, 42, 0.06);
     --glass-blur: none;
 
-    --shadow-card: 0 0 0 1px var(--border);
-    --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.12);
-    --shadow-popover: 0 24px 80px rgba(0, 0, 0, 0.18);
+    --shadow-card: none;
+    --shadow-card-hover: none;
+    --shadow-popover: 0 8px 32px rgba(0, 0, 0, 0.18);
     --shadow-sidebar: 2px 0 8px rgba(0, 0, 0, 0.04);
 
-    --timer-track: rgba(17, 24, 39, 0.12);
+    --timer-track: rgba(17, 24, 39, 0.08);
 
     --chart-grid: rgba(17, 24, 39, 0.08);
-    --chart-tick: rgba(107, 114, 128, 0.95);
+    --chart-tick: #6b7280;
     --chart-cursor: rgba(17, 24, 39, 0.1);
     --chart-ring-bg: rgba(17, 24, 39, 0.08);
 
@@ -208,6 +222,19 @@
 }
 
 @layer components {
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s ease;
+  }
+
+  .stat-card:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-card-hover);
+  }
+
   .card {
     background: var(--bg-card);
     border: 1px solid var(--border);

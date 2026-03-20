@@ -10,9 +10,10 @@ export function ProgressBar({
   color?: 'blue' | 'purple' | 'green'
 }) {
   const pct = Math.max(0, Math.min(1, value))
-  const fill = color === 'green' ? 'bg-accentGreen' : color === 'purple' ? 'bg-accentPurple' : 'bg-accentBlue'
+  void color
+  const fill = 'bg-accentBlue'
   return (
-    <div className="h-2.5 w-full rounded-full bg-[var(--timer-track)]">
+    <div className="h-1.5 w-full rounded-full bg-[color:var(--bg-input)]">
       <motion.div
         className={cn('h-full rounded-full', fill)}
         initial={false}

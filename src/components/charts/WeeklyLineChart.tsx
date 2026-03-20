@@ -8,7 +8,7 @@ import {
   YAxis,
 } from 'recharts'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card } from '@/components/ui/card'
 
 type Point = { label: string; score: number }
 
@@ -23,24 +23,21 @@ export function WeeklyLineChart({ data }: { data: Point[] }) {
   }
 
   return (
-    <Card className="overflow-hidden">
-      <CardHeader className="pb-2">
-        <CardTitle>Weekly Productivity</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="h-56 md:h-64" onPointerDownCapture={blurRechartsFocus}>
+    <Card className="stat-card hover:translate-y-0 hover:shadow-none">
+      <div className="text-sm font-medium text-[color:var(--text-secondary)]">Weekly Productivity</div>
+      <div className="mt-4 h-56 md:h-64" onPointerDownCapture={blurRechartsFocus}>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={data} margin={{ left: 6, right: 18, top: 8, bottom: 0 }}>
               <CartesianGrid stroke="var(--chart-grid)" vertical={false} />
               <XAxis
                 dataKey="label"
-                tick={{ fill: 'var(--chart-tick)', fontSize: 12 }}
+                tick={{ fill: 'var(--chart-tick)', fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
               />
               <YAxis
                 domain={[0, 100]}
-                tick={{ fill: 'var(--chart-tick)', fontSize: 12 }}
+                tick={{ fill: 'var(--chart-tick)', fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
               />
@@ -49,7 +46,7 @@ export function WeeklyLineChart({ data }: { data: Point[] }) {
                 contentStyle={{
                   background: 'var(--tooltip-bg)',
                   border: '1px solid var(--tooltip-border)',
-                  borderRadius: 14,
+                  borderRadius: 10,
                   color: 'var(--foreground)',
                 }}
                 labelStyle={{ color: 'var(--tooltip-label)' }}
@@ -64,8 +61,7 @@ export function WeeklyLineChart({ data }: { data: Point[] }) {
               />
             </LineChart>
           </ResponsiveContainer>
-        </div>
-      </CardContent>
+      </div>
     </Card>
   )
 }

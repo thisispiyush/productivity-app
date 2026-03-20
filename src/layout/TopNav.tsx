@@ -1,11 +1,10 @@
 import { Link, useLocation } from 'react-router-dom'
-import { ChevronDown, LogIn, Moon, Sun, User } from 'lucide-react'
+import { ChevronDown, LogIn, Moon, Settings, Sun, User, LogOut } from 'lucide-react'
 import * as React from 'react'
 
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/hooks/useAuth'
 import { useTheme } from '@/hooks/useTheme'
-import { cn } from '@/utils/cn'
 
 function titleFromPath(pathname: string) {
   if (pathname === '/') return 'Dashboard'
@@ -21,57 +20,72 @@ export function TopNav() {
   const { theme, toggle } = useTheme()
   const { pathname } = useLocation()
   const title = titleFromPath(pathname)
-  const { user } = useAuth()
+  const { user, signOut } = useAuth()
   const [menuOpen, setMenuOpen] = React.useState(false)
 
+  const initial = (user?.email ?? '?').charAt(0).toUpperCase()
+
   return (
-    <div className="flex h-16 items-center justify-between gap-3 rounded-2xl px-3 md:px-4">
+    <div className="flex h-full w-full items-center justify-between gap-3">
       <div className="min-w-0">
-        <div className="truncate text-xs font-semibold tracking-tight md:text-sm">{title}</div>
-        <div className="mt-0.5 hidden truncate text-xs text-muted sm:block">Minimal. Calm. Addictive.</div>
+        <div className="truncate text-sm font-medium tracking-tight text-muted">{title}</div>
+        <div className="mt-0.5 hidden truncate text-xs text-[color:var(--chart-tick)] sm:block">Minimal. Calm. Addictive.</div>
       </div>
 
       <div className="relative flex items-center gap-2">
-        <Button
-          variant="secondary"
-          size="icon"
-          ripple
-          onClick={toggle}
-          aria-label="Toggle theme"
-          className={cn('rounded-2xl')}
-        >
-          {theme === 'dark' ? <Sun /> : <Moon />}
-        </Button>
-
         {user ? (
           <div className="relative">
             <button
               type="button"
               onClick={() => setMenuOpen((o) => !o)}
-              className="flex items-center gap-2 rounded-2xl border border-border bg-card px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-[var(--surface-hover)]"
+              className="flex h-8 items-center gap-2 rounded-[8px] border border-[color:var(--border-strong)] bg-[color:var(--bg-input)] px-2.5 text-sm font-medium text-foreground transition-colors hover:bg-[color:var(--bg-card-hover)]"
             >
-              <div className="grid h-7 w-7 place-items-center rounded-full bg-accentBlue/10 text-xs font-semibold text-accentBlue">
-                {(user.email ?? '?').charAt(0).toUpperCase()}
+              <div className="grid h-7 w-7 place-items-center rounded-[8px] bg-transparent text-[13px] font-medium text-foreground">
+                {initial}
               </div>
               <ChevronDown className="h-3 w-3 text-muted" />
             </button>
             {menuOpen ? (
-              <div className="absolute right-0 top-11 w-44 rounded-2xl border border-border bg-card p-1 text-sm shadow-[var(--shadow-popover)]">
+              <div className="absolute right-0 top-10 min-w-40 rounded-[10px] border border-[color:var(--border-strong)] bg-[color:var(--bg-card-hover)] p-1.5 text-sm shadow-[var(--shadow-popover)]">
                 <Link
                   to="/profile"
                   onClick={() => setMenuOpen(false)}
-                  className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-muted transition-colors hover:bg-[var(--surface-hover)] hover:text-foreground"
+                  className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-[13px] text-[color:var(--text-secondary)] transition-colors hover:bg-[color:var(--sidebar-hover)] hover:text-[color:var(--text-primary)]"
                 >
-                  <User className="h-3.5 w-3.5" />
+                  <User className="h-4 w-4" />
                   Profile
                 </Link>
                 <Link
                   to="/settings"
                   onClick={() => setMenuOpen(false)}
-                  className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-muted transition-colors hover:bg-[var(--surface-hover)] hover:text-foreground"
+                  className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-[13px] text-[color:var(--text-secondary)] transition-colors hover:bg-[color:var(--sidebar-hover)] hover:text-[color:var(--text-primary)]"
                 >
+                  <Settings className="h-4 w-4" />
                   Settings
                 </Link>
+                <div className="my-1 h-px bg-[color:var(--sidebar-border)]" />
+                <button
+                  type="button"
+                  onClick={() => {
+                    toggle()
+                    setMenuOpen(false)
+                  }}
+                  className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-[13px] text-[color:var(--text-secondary)] transition-colors hover:bg-[color:var(--sidebar-hover)] hover:text-[color:var(--text-primary)]"
+                >
+                  {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                  {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+                </button>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    setMenuOpen(false)
+                    await signOut()
+                  }}
+                  className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-[13px] text-[color:var(--text-secondary)] transition-colors hover:bg-[rgba(239,68,68,0.06)] hover:text-[#ef4444]"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Logout
+                </button>
               </div>
             ) : null}
           </div>

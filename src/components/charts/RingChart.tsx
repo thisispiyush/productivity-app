@@ -1,6 +1,6 @@
 import { Pie, PieChart, ResponsiveContainer, Cell } from 'recharts'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card } from '@/components/ui/card'
 
 export function RingChart({
   title,
@@ -31,15 +31,13 @@ export function RingChart({
   }
 
   return (
-    <Card className="overflow-hidden">
-      <CardHeader className="pb-0">
-        <CardTitle className="flex items-center justify-between">
-          <span>{title}</span>
-          <span className="text-sm font-semibold tabular-nums">{pct}%</span>
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="pt-4">
-        <div className="h-40 md:h-44" onPointerDownCapture={blurRechartsFocus}>
+    <Card className="stat-card hover:translate-y-0 hover:shadow-none">
+      <div className="flex items-start justify-between gap-3">
+        <div className="text-sm font-medium text-[color:var(--text-secondary)]">{title}</div>
+        <div className="text-right text-sm font-medium tabular-nums text-[color:var(--text-muted)]">{pct}%</div>
+      </div>
+
+      <div className="mt-4 h-40 md:h-44" onPointerDownCapture={blurRechartsFocus}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -57,9 +55,8 @@ export function RingChart({
               </Pie>
             </PieChart>
           </ResponsiveContainer>
-        </div>
-        {subtitle ? <div className="mt-2 text-xs text-muted">{subtitle}</div> : null}
-      </CardContent>
+      </div>
+      {subtitle ? <div className="mt-3 text-xs text-[color:var(--chart-tick)]">{subtitle}</div> : null}
     </Card>
   )
 }

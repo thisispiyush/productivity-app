@@ -24,6 +24,11 @@ function getGreeting() {
 export function DashboardPage() {
   const { displayName } = useUser()
   const greeting = `${getGreeting()}, ${displayName} \u{1F44B}`
+  const dateLabel = new Date().toLocaleDateString(undefined, {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+  })
 
   const { habits, tasks } = useProductivityStore()
   const { streak, milestone, bumped } = useStreak()
@@ -70,8 +75,9 @@ export function DashboardPage() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <div className="text-2xl font-semibold tracking-tight md:text-3xl">{greeting}</div>
-        <div className="max-w-md text-sm text-muted md:text-base">{message}</div>
+        <div className="text-[30px] font-bold tracking-[-0.03em] text-[color:var(--text-primary)]">{greeting}</div>
+        <div className="-mt-0.5 text-xs text-[color:var(--chart-tick)]">{dateLabel}</div>
+        <div className="mt-1 max-w-md text-sm font-normal text-[color:var(--text-muted)]">{message}</div>
       </div>
 
       <div className="grid grid-cols-2 gap-4 md:gap-6 lg:grid-cols-4">
@@ -124,36 +130,36 @@ export function DashboardPage() {
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <FocusTimer />
-        <Card className="overflow-hidden">
-          <CardContent className="p-6">
+        <Card className="stat-card overflow-hidden hover:translate-y-0 hover:shadow-none">
+          <CardContent className="p-0">
             <div className="flex items-center justify-between gap-3">
-              <div className="text-sm font-semibold tracking-tight">Weekly progress</div>
-              <div className="text-xs text-muted">
+              <div className="text-sm font-medium text-[color:var(--text-secondary)]">Weekly progress</div>
+              <div className="text-xs text-[color:var(--chart-tick)]">
                 Since {weekStart.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
               </div>
             </div>
 
             <div className="mt-5 space-y-5">
               <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <div className="font-medium">Habit goal</div>
-                  <div className="text-muted tabular-nums">
+                <div className="flex items-center justify-between text-[13px]">
+                  <div className="text-[color:var(--text-secondary)]">Habit goal</div>
+                  <div className="tabular-nums text-[color:var(--text-primary)] text-right">
                     {habitsCompletedThisWeek}/{weeklyHabitGoal}
                   </div>
                 </div>
                 <ProgressBar value={habitGoalRatio} color="green" />
-                <div className="text-xs text-muted">Every check-in counts.</div>
+                <div className="text-xs text-[color:var(--text-muted)]">Every check-in counts.</div>
               </div>
 
               <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <div className="font-medium">Task goal</div>
-                  <div className="text-muted tabular-nums">
+                <div className="flex items-center justify-between text-[13px]">
+                  <div className="text-[color:var(--text-secondary)]">Task goal</div>
+                  <div className="tabular-nums text-[color:var(--text-primary)] text-right">
                     {tasksCompletedThisWeek}/{weeklyTaskGoal}
                   </div>
                 </div>
                 <ProgressBar value={taskGoalRatio} color="blue" />
-                <div className="text-xs text-muted">Finish fewer things, better.</div>
+                <div className="text-xs text-[color:var(--text-muted)]">Finish fewer things, better.</div>
               </div>
             </div>
           </CardContent>
@@ -162,4 +168,3 @@ export function DashboardPage() {
     </div>
   )
 }
-
