@@ -5,26 +5,39 @@
 @layer base {
   :root {
     /* Dark theme (default) */
-    --background: #000000;
-    --card: #111111;
-    --surface: #1a1a1a;
-    --surface-hover: #1e1e1e;
-    --border: #2a2a2a;
-    --foreground: #ffffff;
-    --muted: #888888;
+    --bg-page: #080808;
+    --bg-card: #111111;
+    --bg-card-hover: #161616;
+    --bg-subtle: #1a1a1a;
+    --border: rgba(255, 255, 255, 0.06);
+    --border-hover: rgba(255, 255, 255, 0.12);
+    --text-primary: #f0f0f0;
+    --text-secondary: #888888;
+    --text-muted: #555555;
+    --accent: #4f6ef7;
+    --accent-hover: #6b85f8;
+    --accent-subtle: rgba(79, 110, 247, 0.1);
 
-    --accent-blue: #4f6ef7;
+    /* Backwards-compatible aliases (Tailwind + existing components) */
+    --background: var(--bg-page);
+    --card: var(--bg-card);
+    --surface: var(--bg-subtle);
+    --surface-hover: var(--bg-card-hover);
+    --foreground: var(--text-primary);
+    --muted: var(--text-secondary);
+
+    --accent-blue: var(--accent);
     --accent-purple: #8b5cf6;
     --accent-green: #22c55e;
 
-    --glass-bg: color-mix(in srgb, var(--card) 72%, transparent);
+    --glass-bg: color-mix(in srgb, var(--bg-card) 72%, transparent);
     --glass-border: color-mix(in srgb, var(--border) 82%, transparent);
     --glass-shadow: none;
     --glass-blur: blur(14px);
 
-    --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 0 40px rgba(0, 0, 0, 0.6);
-    --shadow-card-hover: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 46px rgba(0, 0, 0, 0.65), 0 0 24px rgba(79, 110, 247, 0.12);
-    --shadow-popover: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 30px 80px rgba(0, 0, 0, 0.7);
+    --shadow-card: 0 0 0 1px var(--border);
+    --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.12);
+    --shadow-popover: 0 24px 80px rgba(0, 0, 0, 0.4);
     --shadow-sidebar: none;
 
     --timer-track: rgba(255, 255, 255, 0.08);
@@ -34,8 +47,8 @@
     --chart-cursor: rgba(255, 255, 255, 0.06);
     --chart-ring-bg: rgba(255, 255, 255, 0.06);
 
-    --tooltip-bg: #111111;
-    --tooltip-border: #1f1f1f;
+    --tooltip-bg: var(--bg-card);
+    --tooltip-border: color-mix(in srgb, var(--border) 70%, transparent);
     --tooltip-label: rgba(161, 161, 170, 0.9);
 
     color-scheme: dark;
@@ -43,26 +56,39 @@
 
   html.light {
     /* Light theme */
-    --background: #f0f2f5;
-    --card: #ffffff;
-    --surface: #ffffff;
-    --surface-hover: #f3f4f6;
-    --border: #e5e7eb;
-    --foreground: #111827;
-    --muted: #6b7280;
+    --bg-page: #f0f2f5;
+    --bg-card: #ffffff;
+    --bg-card-hover: #fafafa;
+    --bg-subtle: #f5f7fa;
+    --border: rgba(0, 0, 0, 0.06);
+    --border-hover: rgba(0, 0, 0, 0.12);
+    --text-primary: #0a0a0a;
+    --text-secondary: #666666;
+    --text-muted: #999999;
+    --accent: #4f6ef7;
+    --accent-hover: #3d5ce6;
+    --accent-subtle: rgba(79, 110, 247, 0.08);
 
-    --accent-blue: #4f6ef7;
+    /* Backwards-compatible aliases (Tailwind + existing components) */
+    --background: var(--bg-page);
+    --card: var(--bg-card);
+    --surface: var(--bg-subtle);
+    --surface-hover: var(--bg-card-hover);
+    --foreground: var(--text-primary);
+    --muted: var(--text-secondary);
+
+    --accent-blue: var(--accent);
     --accent-purple: #8b5cf6;
     --accent-green: #22c55e;
 
-    --glass-bg: #ffffff;
-    --glass-border: #e5e7eb;
+    --glass-bg: var(--bg-card);
+    --glass-border: var(--border);
     --glass-shadow: 0 1px 0 rgba(15, 23, 42, 0.02), 0 10px 24px rgba(15, 23, 42, 0.06);
     --glass-blur: none;
 
-    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.06);
-    --shadow-card-hover: 0 2px 4px rgba(0, 0, 0, 0.05), 0 10px 18px rgba(0, 0, 0, 0.08);
-    --shadow-popover: 0 12px 30px rgba(15, 23, 42, 0.14);
+    --shadow-card: 0 0 0 1px var(--border);
+    --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.12);
+    --shadow-popover: 0 24px 80px rgba(0, 0, 0, 0.18);
     --shadow-sidebar: 2px 0 8px rgba(0, 0, 0, 0.04);
 
     --timer-track: rgba(17, 24, 39, 0.12);
@@ -72,8 +98,8 @@
     --chart-cursor: rgba(17, 24, 39, 0.1);
     --chart-ring-bg: rgba(17, 24, 39, 0.08);
 
-    --tooltip-bg: #ffffff;
-    --tooltip-border: #e5e7eb;
+    --tooltip-bg: var(--bg-card);
+    --tooltip-border: var(--border);
     --tooltip-label: rgba(107, 114, 128, 0.95);
 
     color-scheme: light;
@@ -87,12 +113,19 @@
   body {
     @apply bg-background font-sans text-foreground antialiased;
     transition:
-      background-color 240ms ease,
-      color 240ms ease;
+      background-color 0.15s ease,
+      color 0.15s ease;
     overflow-x: hidden;
   }
 
   @media (prefers-reduced-motion: no-preference) {
+    :where(*, *::before, *::after) {
+      transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease;
+    }
+
     html.theme-transition,
     html.theme-transition * {
       transition:
@@ -110,7 +143,22 @@
   }
 
   ::selection {
-    background: rgba(79, 110, 247, 0.25);
+    background: color-mix(in srgb, var(--accent) 26%, transparent);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--border-hover);
   }
 
   /*
@@ -156,6 +204,156 @@
   /* Don't apply our generic [tabindex] focus-visible outline to Recharts wrappers. */
   :where(.recharts-wrapper, .recharts-surface):focus-visible {
     outline: none !important;
+  }
+}
+
+@layer components {
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.15s ease;
+  }
+
+  .card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.97);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-secondary:hover {
+    background: var(--bg-subtle);
+    border-color: var(--border-hover);
+  }
+
+  .btn-danger {
+    background: transparent;
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+  }
+
+  .btn-danger:hover {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.5);
+  }
+
+  .input {
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: var(--text-primary);
+    width: 100%;
+    transition: all 0.15s ease;
+    outline: none;
+  }
+
+  .input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-subtle);
+    background: var(--bg-card);
+  }
+
+  .input::placeholder {
+    color: var(--text-muted);
+  }
+
+  .modal-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+  }
+
+  .modal {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+    animation: modalIn 0.2s ease;
+  }
+
+  .page-enter {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  .page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.2s ease;
+  }
+
+  .kbd-hint {
+    @apply rounded-md border border-border bg-card px-1.5 py-0.5 text-[11px] font-medium text-muted;
+  }
+
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--bg-subtle) 25%,
+      var(--bg-card-hover) 50%,
+      var(--bg-subtle) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
   }
 }
 

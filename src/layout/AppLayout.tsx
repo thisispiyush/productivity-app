@@ -12,8 +12,8 @@ export function AppLayout() {
   return (
     <div className="min-h-full bg-background">
       <Sidebar />
-      <main className="min-h-full overflow-x-hidden md:pl-72">
-        <div className="fixed left-0 right-0 top-0 z-50 border-b border-border bg-card/95 shadow-[0_1px_4px_rgba(0,0,0,0.06)] backdrop-blur dark:bg-background/70 dark:shadow-none md:left-72">
+      <main className="min-h-full overflow-x-hidden md:pl-[240px]">
+        <div className="fixed left-0 right-0 top-0 z-50 border-b border-border bg-card/95 shadow-[0_1px_4px_rgba(0,0,0,0.06)] backdrop-blur dark:bg-background/70 dark:shadow-none md:left-[240px]">
           <div className="mx-auto max-w-6xl px-4 py-3 md:px-6 lg:px-8">
             <TopNav />
           </div>

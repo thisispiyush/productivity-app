@@ -9,7 +9,7 @@ const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElemen
       className={cn(
         // Avoid "click focus rings" on chart cards (e.g. Recharts can focus internal wrappers on click).
         // Interactive children (buttons/inputs/links) already carry their own focus-visible styles.
-        'rounded-xl border border-border bg-card text-foreground hover-glow transition-all duration-200 will-change-transform hover:-translate-y-1',
+        'rounded-[14px] border border-border bg-card text-foreground hover-glow transition-all duration-200 will-change-transform hover:-translate-y-0.5 hover:border-[color:var(--border-hover)]',
         className,
       )}
       {...props}
