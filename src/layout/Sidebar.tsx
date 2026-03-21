@@ -30,25 +30,25 @@ export function Sidebar({
   return (
     <aside
       className={cn(
-        'fixed left-0 top-0 z-40 hidden h-screen flex-col overflow-hidden border-r border-[color:var(--sidebar-border)] bg-[color:var(--bg-sidebar)] pb-4 md:flex',
+        'fixed left-0 top-0 z-40 hidden h-screen flex-col overflow-visible border-r border-[color:var(--sidebar-border)] bg-[color:var(--bg-sidebar)] pb-4 md:flex',
         'transition-[width] duration-200 ease-out',
-        collapsed ? 'w-[60px] px-2' : 'w-[220px] px-3',
+        collapsed ? 'w-[72px] px-2' : 'w-[220px] px-3',
       )}
     >
       <button
         type="button"
         onClick={onToggleCollapsed}
-        className="absolute right-0 top-1/2 z-50 hidden h-8 w-5 -translate-y-1/2 items-center justify-center rounded-l-lg border border-r-0 border-[color:var(--sidebar-toggle-border)] bg-[color:var(--sidebar-toggle-bg)] shadow-[var(--sidebar-toggle-shadow)] transition-all duration-150 ease-out hover:border-[color:var(--sidebar-toggle-border-hover)] hover:bg-[color:var(--sidebar-toggle-bg-hover)] md:flex"
+        className="absolute -right-3 top-1/2 z-50 hidden h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full border border-[color:var(--sidebar-border)] bg-surface shadow-sm transition-all duration-150 ease-out hover:scale-110 hover:bg-muted md:flex"
         aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
       >
         <ChevronLeft
-          size={12}
-          className={cn('text-[color:var(--sidebar-toggle-icon)] transition-transform', collapsed && 'rotate-180')}
+          size={14}
+          className={cn('text-muted-foreground transition-transform duration-200', collapsed && 'rotate-180')}
         />
       </button>
 
       <div className="shrink-0 pt-4">
-        <Link to="/" className={cn('flex items-center gap-3 px-4 py-4 no-underline transition hover:opacity-80', collapsed && 'px-2')}>
+        <Link to="/" className={cn('flex items-center gap-3 py-4 no-underline transition hover:opacity-80', collapsed ? 'justify-center' : 'px-4')}>
           <div className="flex h-8 w-8 items-center justify-center rounded-[10px] border border-accentBlue/20 bg-accentBlue/10 text-accentBlue">
             <EKGIcon className="h-5 w-5 drop-shadow-[0_0_6px_rgba(79,110,247,0.55)]" />
           </div>
@@ -59,11 +59,11 @@ export function Sidebar({
             </div>
           ) : null}
         </Link>
-        <div className={cn("mt-3 h-px bg-gradient-to-r from-transparent via-[color:var(--sidebar-border)] to-transparent", collapsed ? "-mx-2" : "-mx-3")} />
+        <div className={cn("mt-2 h-px bg-gradient-to-r from-transparent via-[color:var(--sidebar-border)] to-transparent", collapsed ? "-mx-2" : "-mx-3")} />
       </div>
 
       <TooltipProvider delayDuration={80}>
-        <nav className={cn('mt-3 flex-1 space-y-1 overflow-hidden', collapsed && 'px-1')}>
+        <nav className={cn('mt-4 flex-1 flex flex-col', collapsed ? 'items-center gap-2 px-0' : 'space-y-1 px-1')}>
           {nav.map((item) => {
             const Icon = item.icon
             const showDot =
@@ -77,20 +77,32 @@ export function Sidebar({
                 end={item.to === '/'}
                 className={({ isActive }) =>
                   cn(
-                    'group relative flex items-center rounded-lg border-l-2 border-l-transparent text-sm font-medium text-[color:var(--text-secondary)] transition-all hover:bg-[color:var(--sidebar-hover)]',
-                    collapsed ? 'justify-center px-0 py-2' : 'gap-2.5 px-3 py-2',
-                    isActive &&
-                      'bg-[color:var(--accent-subtle)] text-[color:var(--accent)] border-l-2 border-l-[color:var(--accent)]',
+                    'group relative flex items-center font-medium transition-all',
+                    collapsed
+                      ? 'justify-center w-11 h-11 rounded-xl hover:bg-muted text-sm'
+                      : 'gap-2.5 px-3 py-2 rounded-lg border-l-2 border-l-transparent text-[color:var(--text-secondary)] hover:bg-[color:var(--sidebar-hover)] text-sm',
+                    isActive && !collapsed && 'bg-[color:var(--accent-subtle)] text-accentBlue border-l-2 border-l-accentBlue',
+                    isActive && collapsed && 'bg-accentBlue/10 text-accentBlue',
                   )
                 }
               >
-                <span className="relative">
-                  <Icon className="h-[18px] w-[18px] text-[color:var(--text-muted)] group-aria-[current=page]:text-[color:var(--accent)]" />
-                  {showDot ? (
-                    <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-accentBlue" aria-hidden="true" />
-                  ) : null}
-                </span>
-                {!collapsed ? <span className="min-w-0 truncate">{item.label}</span> : null}
+                {({ isActive }) => (
+                  <>
+                    {collapsed && isActive && (
+                      <div className="absolute left-[-8px] top-1/2 h-5 w-1 -translate-y-1/2 rounded-r-md bg-accentBlue" />
+                    )}
+                    <span className="relative flex items-center justify-center">
+                      <Icon className={cn(
+                        collapsed ? 'h-6 w-6' : 'h-[18px] w-[18px]',
+                        isActive ? 'text-accentBlue' : (collapsed ? 'text-muted-foreground group-hover:text-foreground' : 'text-[color:var(--text-muted)] group-hover:text-[color:var(--text-secondary)]')
+                      )} />
+                      {showDot ? (
+                        <span className={cn("absolute bg-accentBlue rounded-full", collapsed ? "-right-1 -top-1 h-2.5 w-2.5 border-[2px] border-[color:var(--bg-sidebar)]" : "-right-0.5 -top-0.5 h-2 w-2")} aria-hidden="true" />
+                      ) : null}
+                    </span>
+                    {!collapsed ? <span className="min-w-0 truncate">{item.label}</span> : null}
+                  </>
+                )}
               </NavLink>
             )
 
@@ -99,7 +111,13 @@ export function Sidebar({
             return (
               <Tooltip key={item.to}>
                 <TooltipTrigger asChild>{link}</TooltipTrigger>
-                <TooltipContent side="right">{item.label}</TooltipContent>
+                <TooltipContent
+                  side="right"
+                  sideOffset={14}
+                  className="rounded-full border-none bg-zinc-900 px-3 py-1.5 text-xs font-semibold tracking-wide text-white shadow-md dark:bg-zinc-800 dark:text-zinc-100 animate-in fade-in zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:zoom-out-95"
+                >
+                  {item.label}
+                </TooltipContent>
               </Tooltip>
             )
           })}

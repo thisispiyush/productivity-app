@@ -45,7 +45,7 @@ export function HabitTrackerPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pt-6 md:pt-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-end">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <Card className="hidden sm:block">

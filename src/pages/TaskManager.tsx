@@ -115,7 +115,7 @@ export function TaskManagerPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pt-6 md:pt-8">
 
       <Card>
         <CardContent className="p-4 md:p-6">
