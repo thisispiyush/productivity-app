@@ -144,15 +144,15 @@ export function AnalyticsPage() {
   return (
     <div className="space-y-6 pt-[32px]">
       <div className="mb-6">
-        <h1 className="text-[24px] font-semibold tracking-tight text-foreground">Analytics</h1>
+        <h1 className="text-[22px] md:text-[24px] font-semibold tracking-tight text-foreground">Analytics</h1>
         <p className="mt-1 text-[13px] text-muted-foreground">Honest trends over time.</p>
       </div>
 
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-        <StatCard title="Total Habits Completed" value={totalHabitsCompleted} icon={Target} accent="blue" />
+        <StatCard title={<><span className="hidden md:inline">Total Habits Completed</span><span className="md:hidden">Total Habits</span></>} value={totalHabitsCompleted} icon={Target} accent="blue" />
         <StatCard title="Best Streak" value={bestStreak === 1 ? '1 day' : `${bestStreak} days`} icon={Flame} accent="orange" />
-        <StatCard title="Most Productive Day" value={mostProductiveDay} icon={Trophy} accent="purple" />
-        <StatCard title="Tasks Done This Week" value={tasksThisWeek} icon={CheckCircle2} accent="green" />
+        <StatCard title={<><span className="hidden md:inline">Most Productive Day</span><span className="md:hidden">Best Day</span></>} value={mostProductiveDay} icon={Trophy} accent="purple" />
+        <StatCard title={<><span className="hidden md:inline">Tasks Done This Week</span><span className="md:hidden">This Week</span></>} value={tasksThisWeek} icon={CheckCircle2} accent="green" />
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">

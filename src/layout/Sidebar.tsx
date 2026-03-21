@@ -32,6 +32,13 @@ export function Sidebar(_props: {
 
   return (
     <>
+      <button 
+        className="fixed top-3 right-4 z-50 md:hidden flex h-9 w-9 items-center justify-center rounded-full overflow-hidden border border-border bg-card shadow-sm"
+        onClick={() => setSettingsOpen(true)}
+      >
+        <Avatar name={displayName || defaultName} photoUrl={avatarDataUrl} size={36} />
+      </button>
+
       <aside className="fixed left-0 top-0 z-40 hidden h-screen w-[220px] flex-col overflow-y-auto border-r border-[color:var(--sidebar-border)] bg-[color:var(--bg-sidebar)] md:flex">
         {/* Top section: Logo */}
         <div className="shrink-0 pt-4 px-4">

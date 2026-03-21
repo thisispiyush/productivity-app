@@ -12,13 +12,13 @@ export function AppLayout() {
   const sidebarWidth = sidebarCollapsed ? '60px' : '220px'
 
   return (
-    <div className="h-screen bg-background" style={{ ['--sidebar-w' as never]: sidebarWidth }}>
+    <div className="min-h-[100dvh] md:h-screen flex flex-col md:flex-row bg-background" style={{ ['--sidebar-w' as never]: sidebarWidth }}>
 
 
       <div className="flex min-h-0 flex-1 overflow-hidden">
         <Sidebar collapsed={sidebarCollapsed} onToggleCollapsed={() => setSidebarCollapsed((c) => !c)} />
-        <main className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto md:pl-[var(--sidebar-w)]">
-          <div className="mx-auto max-w-6xl px-4 pb-24 pt-0 md:px-8 md:pb-8 md:pt-0">
+        <main className="min-h-0 flex-1 overflow-x-hidden md:overflow-y-auto md:pl-[var(--sidebar-w)]">
+          <div className="mx-auto max-w-6xl px-4 pb-[80px] pt-0 md:px-8 md:pb-8 md:pt-0">
             <div className="relative z-0">
               <StartupErrorBanner />
             </div>

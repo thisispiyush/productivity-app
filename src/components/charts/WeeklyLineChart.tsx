@@ -25,13 +25,13 @@ export function WeeklyLineChart({ data }: { data: Point[] }) {
   return (
     <Card className="stat-card hover:translate-y-0 hover:shadow-none">
       <div className="text-sm font-medium text-[color:var(--text-secondary)]">Weekly Productivity</div>
-      <div className="mt-4 h-56 md:h-64" onPointerDownCapture={blurRechartsFocus}>
+      <div className="mt-4 h-[180px] md:h-64 overflow-hidden w-full" onPointerDownCapture={blurRechartsFocus}>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={data} margin={{ left: 6, right: 18, top: 8, bottom: 0 }}>
               <CartesianGrid stroke="var(--chart-grid)" vertical={false} />
               <XAxis
                 dataKey="label"
-                tick={{ fill: 'var(--chart-tick)', fontSize: 11 }}
+                tick={{ fill: 'var(--chart-tick)', fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? 10 : 11 }}
                 axisLine={false}
                 tickLine={false}
               />

@@ -72,15 +72,15 @@ export function DashboardPage() {
 
   return (
     <div className="space-y-6 pt-[32px]">
-      <div className="mb-2 pb-7 space-y-2">
-        <div className="text-[30px] font-bold tracking-[-0.03em] text-[color:var(--text-primary)]">{greeting}</div>
+      <div className="mb-0 pb-4 md:mb-2 md:pb-7 space-y-2">
+        <div className="text-[26px] md:text-[30px] font-bold tracking-[-0.03em] text-[color:var(--text-primary)]">{greeting}</div>
         <div className="-mt-0.5 text-xs text-[color:var(--chart-tick)]">{dateLabel}</div>
-        <div className="mt-1 max-w-md text-sm font-normal text-[color:var(--text-muted)]">{message}</div>
+        <div className="mt-1 max-w-md text-[12px] md:text-sm font-normal text-[color:var(--text-muted)]">{message}</div>
       </div>
 
       <div className="mt-6 grid grid-cols-2 gap-4 md:gap-6 lg:grid-cols-4">
         <StatCard
-          title="Habits Completed"
+          title={<><span className="hidden md:inline">Habits Completed</span><span className="md:hidden">Habits</span></>}
           value={`${habitsDoneToday}/${habits.length}`}
           subtitle="Logged today"
           icon={Target}
@@ -103,7 +103,7 @@ export function DashboardPage() {
             transition={{ duration: 0.45, ease: 'easeOut' }}
           >
             <StatCard
-              title="Current Streak"
+              title={<><span className="hidden md:inline">Current Streak</span><span className="md:hidden">Streak</span></>}
               value={
                 <span className="inline-flex items-center gap-2">
                   <Flame className="h-5 w-5 text-accentPurple" />
@@ -116,8 +116,8 @@ export function DashboardPage() {
             />
           </motion.div>
         </div>
-        <StatCard title="Tasks Completed" value={tasksDone} subtitle="All time (local)" icon={CheckCircle2} accent="blue" />
-        <StatCard title="Pending Tasks" value={tasksPending} subtitle="Queue remaining" icon={ListTodo} accent="blue" />
+        <StatCard title={<><span className="hidden md:inline">Tasks Completed</span><span className="md:hidden">Tasks</span></>} value={tasksDone} subtitle="All time (local)" icon={CheckCircle2} accent="blue" />
+        <StatCard title={<><span className="hidden md:inline">Pending Tasks</span><span className="md:hidden">Pending</span></>} value={tasksPending} subtitle="Queue remaining" icon={ListTodo} accent="blue" />
       </div>
 
       <div className="w-full">

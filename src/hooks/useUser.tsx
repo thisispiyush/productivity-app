@@ -72,7 +72,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     // 2. Supabase auth user metadata
     // 3. email prefix (before @)
     // 4. "there"
-    if (displayName) return
+    if (displayName && displayName !== 'there') return
 
     const fromAuth = capitalize(nameFromUser(user))
     if (fromAuth) {

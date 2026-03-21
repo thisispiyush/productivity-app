@@ -117,7 +117,7 @@ export function TaskManagerPage() {
   return (
     <div className="space-y-6 pt-[32px]">
       <div className="mb-6">
-        <h1 className="text-[24px] font-semibold tracking-tight text-foreground">Tasks</h1>
+        <h1 className="text-[22px] md:text-[24px] font-semibold tracking-tight text-foreground">Tasks</h1>
         <p className="mt-1 text-[13px] text-muted-foreground">One task at a time.</p>
       </div>
 

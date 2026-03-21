@@ -9,7 +9,7 @@ export function StatCard({
   icon: Icon,
   accent: _accent = 'blue',
 }: {
-  title: string
+  title: React.ReactNode
   value: React.ReactNode
   subtitle?: string
   icon: LucideIcon
@@ -18,8 +18,8 @@ export function StatCard({
   return (
     <Card className="stat-card relative hover:translate-y-0 hover:shadow-none">
       <div className="pr-8">
-        <div className="stat-label font-medium uppercase">{title}</div>
-        <div className="mt-2 text-[28px] font-semibold tracking-[-0.02em] text-[color:var(--text-primary)]">
+        <div className="text-[12px] md:text-[14px] font-medium uppercase text-muted-foreground">{title}</div>
+        <div className="mt-2 text-[24px] md:text-[32px] font-semibold tracking-[-0.02em] text-[color:var(--text-primary)]">
           {value}
         </div>
         {subtitle ? <div className="mt-1 text-xs text-[color:var(--text-muted)]">{subtitle}</div> : null}
