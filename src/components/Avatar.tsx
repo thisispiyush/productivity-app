@@ -32,7 +32,7 @@ export function Avatar({
         src={photoUrl}
         alt={name}
         style={{ width: size, height: size }}
-        className={['rounded-lg object-cover', className].filter(Boolean).join(' ')}
+        className={['rounded-full object-cover', className].filter(Boolean).join(' ')}
       />
     )
   }
@@ -44,7 +44,7 @@ export function Avatar({
         width: size,
         height: size,
         background: `linear-gradient(135deg, ${from}, ${to})`,
-        borderRadius: '8px',
+        borderRadius: '9999px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

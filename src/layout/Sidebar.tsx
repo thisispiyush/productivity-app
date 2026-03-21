@@ -31,6 +31,7 @@ export function Sidebar({
     <aside
       className={cn(
         'fixed inset-y-0 left-0 z-40 hidden flex-col border-r border-[color:var(--sidebar-border)] bg-[color:var(--bg-sidebar)] py-4 shadow-[var(--shadow-sidebar)] md:flex',
+        'relative',
         'transition-[width] duration-200 ease-out',
         collapsed ? 'w-[60px] px-2' : 'w-[220px] px-3',
       )}
@@ -38,10 +39,13 @@ export function Sidebar({
       <button
         type="button"
         onClick={onToggleCollapsed}
-        className="absolute -right-3 top-8 hidden h-6 w-6 items-center justify-center rounded-full border border-border bg-card transition-all hover:bg-surface md:flex"
+        className="absolute -right-3 top-1/2 z-50 hidden h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full border border-[color:var(--sidebar-toggle-border)] bg-[color:var(--sidebar-toggle-bg)] shadow-[var(--sidebar-toggle-shadow)] transition-all duration-150 ease-out hover:border-[color:var(--sidebar-toggle-border-hover)] hover:bg-[color:var(--sidebar-toggle-bg-hover)] md:flex"
         aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
       >
-        <ChevronLeft size={12} className={cn('transition-transform', collapsed && 'rotate-180')} />
+        <ChevronLeft
+          size={12}
+          className={cn('text-[color:var(--sidebar-toggle-icon)] transition-transform', collapsed && 'rotate-180')}
+        />
       </button>
 
       <Link to="/" className={cn('flex items-center gap-3 px-4 py-4 no-underline transition hover:opacity-80', collapsed && 'px-2')}>

@@ -88,10 +88,10 @@ export function ProfilePage() {
             <button
               type="button"
               onClick={onPickAvatar}
-              className="group relative grid h-14 w-14 place-items-center overflow-hidden rounded-xl border border-border bg-surface text-sm font-semibold text-foreground transition-colors hover:bg-[var(--surface-hover)]"
+              className="group relative grid h-14 w-14 place-items-center overflow-hidden rounded-full border border-border bg-surface text-sm font-semibold text-foreground transition-colors hover:bg-[var(--surface-hover)]"
               aria-label="Upload profile photo"
             >
-              <Avatar name={displayName || defaultName} photoUrl={avatarDataUrl} size={56} className="rounded-xl" />
+              <Avatar name={displayName || defaultName} photoUrl={avatarDataUrl} size={56} />
               <span className="pointer-events-none absolute inset-0 grid place-items-center bg-black/0 text-white opacity-0 transition-opacity group-hover:bg-black/35 group-hover:opacity-100">
                 <Upload className="h-4 w-4" />
               </span>

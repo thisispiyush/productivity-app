@@ -1,13 +1,14 @@
 import { Link, useLocation } from 'react-router-dom'
 import { ChevronDown, LogIn, Moon, Settings, Sun, User, LogOut } from 'lucide-react'
 import * as React from 'react'
+import { format } from 'date-fns'
 
+import { Avatar } from '@/components/Avatar'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/hooks/useAuth'
 import { useLocalStorageState } from '@/hooks/useLocalStorage'
 import { useTheme } from '@/hooks/useTheme'
 import { useUser } from '@/hooks/useUser'
-import { Avatar } from '@/components/Avatar'
 
 function titleFromPath(pathname: string) {
   if (pathname === '/') return 'Dashboard'
@@ -32,50 +33,53 @@ function subtitleFromPath(pathname: string) {
 export function TopNav() {
   const { theme, toggle } = useTheme()
   const { pathname } = useLocation()
-  const title = titleFromPath(pathname)
-  const subtitle = subtitleFromPath(pathname)
+  const pageTitle = titleFromPath(pathname)
+  const pageSubtitle = subtitleFromPath(pathname)
   const { user, signOut } = useAuth()
   const { displayName } = useUser()
   const [menuOpen, setMenuOpen] = React.useState(false)
-
   const [avatarDataUrl] = useLocalStorageState<string | null>('pulse-profile.avatar', null)
-
   const [time, setTime] = React.useState('')
+
   React.useEffect(() => {
     const update = () => {
-      const now = new Date()
-      const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
-      const dateStr = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
-      setTime(`${dateStr} • ${timeStr}`)
+      setTime(format(new Date(), "EEE, MMM d \u2022 hh:mm a"))
     }
+
     update()
-    const interval = window.setInterval(update, 1000)
+    const interval = window.setInterval(update, 60000)
+
     return () => window.clearInterval(interval)
   }, [])
 
   return (
-    <div className="flex h-full w-full items-center justify-between gap-3">
-      <div className="min-w-0">
-        <div className="truncate text-sm font-medium tracking-tight text-muted">{title}</div>
-        <div className="mt-0.5 hidden truncate text-xs text-[color:var(--chart-tick)] sm:block">{subtitle}</div>
+    <div className="flex h-full w-full items-center justify-between gap-4">
+      <div className="flex min-w-0 flex-col justify-center">
+        <p className="truncate text-sm font-medium leading-5 text-foreground">{pageTitle}</p>
+        <p className="truncate text-xs leading-4 text-muted">{pageSubtitle}</p>
       </div>
 
-      <div className="relative flex items-center gap-2">
+      <div className="relative flex items-center gap-3">
         {user ? (
-          <div className="relative">
-            <span className="mr-4 hidden text-xs text-muted sm:inline">
+          <div className="relative flex items-center gap-3">
+            <p className="hidden text-xs text-muted sm:block" style={{ fontFamily: 'inherit' }}>
               {time}
-            </span>
+            </p>
             <button
               type="button"
-              onClick={() => setMenuOpen((o) => !o)}
-              className="flex items-center gap-2 rounded-lg border border-transparent px-2 py-1.5 text-sm font-medium text-foreground transition-all hover:border-[color:var(--border-strong)] hover:bg-[color:var(--bg-card-hover)]"
+              onClick={() => setMenuOpen((open) => !open)}
+              className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-medium text-foreground transition-all hover:bg-[color:var(--bg-subtle)]"
             >
-              <Avatar name={displayName || user.email || 'Pulse User'} photoUrl={avatarDataUrl} size={32} />
-              <ChevronDown className="h-3 w-3 text-muted" />
+              <Avatar
+                name={displayName || user.email || 'Pulse User'}
+                photoUrl={avatarDataUrl}
+                size={28}
+                className="ring-1 ring-[color:var(--border)]"
+              />
+              <ChevronDown size={14} className="text-muted" />
             </button>
             {menuOpen ? (
-              <div className="absolute right-0 top-10 min-w-40 rounded-[10px] border border-[color:var(--border-strong)] bg-[color:var(--bg-card-hover)] p-1.5 text-sm shadow-[var(--shadow-popover)]">
+              <div className="absolute right-0 top-[calc(100%+8px)] min-w-40 rounded-[10px] border border-[color:var(--border-strong)] bg-[color:var(--bg-card-hover)] p-1.5 text-sm shadow-[var(--shadow-popover)]">
                 <Link
                   to="/profile"
                   onClick={() => setMenuOpen(false)}
