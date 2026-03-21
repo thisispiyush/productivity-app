@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { Switch } from '@/components/ui/switch'
 import { useAuth } from '@/hooks/useAuth'
-import { useLocalStorageState } from '@/hooks/useLocalStorage'
 import { usePreferences } from '@/hooks/usePreferences'
 import { useProductivityStore } from '@/hooks/useProductivityStore'
 import { useTheme } from '@/hooks/useTheme'
@@ -81,7 +80,7 @@ export function SettingsModal({ open, onOpenChange }: { open: boolean; onOpenCha
   const [activeTab, setActiveTab] = React.useState<TabId>('profile')
 
   const { user, signOut } = useAuth()
-  const { displayName, updateName } = useUser()
+  const { displayName, updateName, avatarDataUrl, setAvatarDataUrl } = useUser()
   const { clearAllData, habits, tasks } = useProductivityStore()
   const { theme, setTheme } = useTheme()
   const { defaultTaskPriority, setDefaultTaskPriority, showCompletedTasks, setShowCompletedTasks, focusDuration, setFocusDuration } = usePreferences()
@@ -92,7 +91,6 @@ export function SettingsModal({ open, onOpenChange }: { open: boolean; onOpenCha
     return base ? base.replace(/[._-]+/g, ' ') : 'Pulse User'
   }, [user?.email])
 
-  const [avatarDataUrl, setAvatarDataUrl] = useLocalStorageState<string | null>('pulse-profile.avatar', null)
   const [editingName, setEditingName] = React.useState(false)
   const [draftName, setDraftName] = React.useState(displayName || defaultName)
   const [signingOut, setSigningOut] = React.useState(false)

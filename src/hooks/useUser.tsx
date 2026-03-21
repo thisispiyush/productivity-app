@@ -8,6 +8,8 @@ import { supabase } from '@/lib/supabaseClient'
 type UserCtx = {
   displayName: string
   updateName: (newName: string) => Promise<void>
+  avatarDataUrl: string | null
+  setAvatarDataUrl: (arg: string | null | ((prev: string | null) => string | null)) => void
 }
 
 const UserContext = React.createContext<UserCtx | null>(null)
@@ -45,6 +47,24 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       return ''
     }
   })
+
+  const [avatarDataUrl, setAvatarDataUrl] = React.useState<string | null>(() => {
+    try {
+      const raw = localStorage.getItem('pulse-profile.avatar')
+      if (!raw) return null
+      return JSON.parse(raw) as string | null
+    } catch {
+      return null
+    }
+  })
+
+  React.useEffect(() => {
+    try {
+      localStorage.setItem('pulse-profile.avatar', JSON.stringify(avatarDataUrl))
+    } catch {
+      // ignore
+    }
+  }, [avatarDataUrl])
 
   React.useEffect(() => {
     // Fallback order:
@@ -85,7 +105,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     [],
   )
 
-  const value = React.useMemo(() => ({ displayName, updateName }), [displayName, updateName])
+  const value = React.useMemo(() => ({ displayName, updateName, avatarDataUrl, setAvatarDataUrl }), [displayName, updateName, avatarDataUrl])
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }

@@ -6,7 +6,6 @@ import { Avatar } from '@/components/Avatar'
 import { EKGIcon } from '@/components/icons/EKGIcon'
 import { useAuth } from '@/hooks/useAuth'
 import { useUser } from '@/hooks/useUser'
-import { useLocalStorageState } from '@/hooks/useLocalStorage'
 import { cn } from '@/utils/cn'
 import { SettingsModal } from '@/components/SettingsModal'
 
@@ -22,7 +21,7 @@ export function Sidebar(_props: {
   onToggleCollapsed?: () => void
 }) {
   const { user } = useAuth()
-  const { displayName } = useUser()
+  const { displayName, avatarDataUrl } = useUser()
   const [settingsOpen, setSettingsOpen] = React.useState(false)
   
   const defaultName = React.useMemo(() => {
@@ -30,7 +29,6 @@ export function Sidebar(_props: {
     const base = email.includes('@') ? email.split('@')[0] : email
     return base ? base.replace(/[._-]+/g, ' ') : 'Pulse User'
   }, [user?.email])
-  const [avatarDataUrl] = useLocalStorageState<string | null>('pulse-profile.avatar', null)
 
   return (
     <>
