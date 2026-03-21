@@ -120,10 +120,10 @@ export function ProfilePage() {
             <CardTitle>Profile Information</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex items-center justify-between gap-4">
-              <div>
+            <div className="flex items-start justify-between gap-4">
+              <div className="min-w-[160px] flex-1">
                 <div className="text-sm font-medium">Display name</div>
-                <div className="mt-0.5 text-xs text-muted">Shown across Pulse.</div>
+                <div className="mt-0.5 text-xs text-muted sm:whitespace-nowrap">Shown across Pulse.</div>
               </div>
               <div className="min-w-[180px]">
                 {editing ? (
@@ -152,20 +152,20 @@ export function ProfilePage() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between gap-4">
-              <div>
+            <div className="flex items-start justify-between gap-4">
+              <div className="min-w-[160px] flex-1">
                 <div className="text-sm font-medium">Email</div>
-                <div className="mt-0.5 text-xs text-muted">Used for login.</div>
+                <div className="mt-0.5 text-xs text-muted sm:whitespace-nowrap">Used for login.</div>
               </div>
-              <div className="truncate text-sm font-medium">{user?.email ?? 'Unknown'}</div>
+              <div className="min-w-[180px] truncate text-sm font-medium">{user?.email ?? 'Unknown'}</div>
             </div>
 
-            <div className="flex items-center justify-between gap-4">
-              <div>
+            <div className="flex items-start justify-between gap-4">
+              <div className="min-w-[160px] flex-1">
                 <div className="text-sm font-medium">Member since</div>
-                <div className="mt-0.5 text-xs text-muted">Account creation month.</div>
+                <div className="mt-0.5 text-xs text-muted sm:whitespace-nowrap">Account creation month.</div>
               </div>
-              <div className="text-sm font-medium">{joined}</div>
+              <div className="min-w-[180px] text-sm font-medium">{joined}</div>
             </div>
           </CardContent>
         </Card>

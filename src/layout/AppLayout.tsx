@@ -16,13 +16,13 @@ export function AppLayout() {
     <div className="min-h-full bg-background" style={{ ['--sidebar-w' as never]: sidebarWidth }}>
       <Sidebar collapsed={sidebarCollapsed} onToggleCollapsed={() => setSidebarCollapsed((c) => !c)} />
       <main className="min-h-full overflow-x-hidden md:pl-[var(--sidebar-w)]">
-        <div className="sticky left-0 right-0 top-0 z-40 h-[52px] border-b border-[color:var(--header-border)] bg-[color:var(--bg-header)] shadow-[var(--shadow-header)] md:left-[var(--sidebar-w)]">
+        <div className="sticky top-0 z-40 h-[52px] border-b border-[color:var(--header-border)] bg-[color:var(--bg-header)] shadow-[var(--shadow-header)]">
           <div className="mx-auto flex h-full max-w-6xl items-center px-6">
             <TopNav />
           </div>
         </div>
 
-        <div className="mx-auto max-w-6xl px-4 pb-24 pt-6 md:px-8 md:pb-8 md:pt-6">
+        <div className="mx-auto max-w-6xl px-4 pb-24 pt-0 md:px-8 md:pb-8 md:pt-0">
           <div className="relative z-0">
             <StartupErrorBanner />
           </div>

@@ -126,7 +126,7 @@ export function FocusTimer() {
   }
 
   return (
-    <Card className="stat-card hover:translate-y-0 hover:shadow-none">
+    <Card className="stat-card overflow-hidden hover:translate-y-0 hover:shadow-none">
       <div className="flex items-center justify-between gap-3">
         <div className="text-sm font-medium text-[color:var(--text-secondary)]">Focus Mode</div>
         <div className="text-xs font-medium text-[color:var(--text-muted)]">
@@ -173,10 +173,16 @@ export function FocusTimer() {
         </div>
       ) : null}
 
-      <div className="mt-5 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div className="relative grid h-[120px] w-[120px] place-items-center rounded-[14px] border border-border bg-[color:var(--bg-input)]">
-            <svg width="120" height="120" viewBox="0 0 120 120" aria-hidden="true">
+      <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex min-w-0 items-center gap-4">
+          <div className="relative h-[120px] w-[120px] shrink-0 overflow-hidden rounded-[14px] border border-border bg-[color:var(--bg-input)]">
+            <svg
+              width="120"
+              height="120"
+              viewBox="0 0 120 120"
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full"
+            >
               <circle cx="60" cy="60" r="45" fill="none" stroke="var(--bg-subtle)" strokeWidth="3" />
               <circle
                 cx="60"
@@ -192,18 +198,18 @@ export function FocusTimer() {
                 style={{ transition: 'stroke-dashoffset 1s linear' }}
               />
             </svg>
-            <div className="pointer-events-none absolute inset-0 grid place-items-center">
-              <div className="timer-display tabular-nums">{formatTime(remaining)}</div>
+            <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[34px] font-light leading-none tracking-[-0.02em] text-foreground tabular-nums">
+              {formatTime(remaining)}
             </div>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <div className="text-[13px] font-medium text-[color:var(--text-secondary)]">
               {mode === 'focus' ? 'Deep work' : 'Recovery'}
             </div>
-            <div className="mt-1 text-xs text-[color:var(--text-muted)]">
+            <div className="mt-1 text-xs leading-5 text-[color:var(--text-muted)]">
               {mode === 'focus'
-                ? 'No multitasking. One task. One timer. (Space to start/pause)'
+                ? 'No multitasking. One task. One timer.'
                 : 'Stand up, breathe, and come back sharp.'}
             </div>
           </div>

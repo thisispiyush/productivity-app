@@ -39,7 +39,7 @@ export function Sidebar({
       <button
         type="button"
         onClick={onToggleCollapsed}
-        className="absolute -right-3 top-1/2 z-50 hidden h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full border border-[color:var(--sidebar-toggle-border)] bg-[color:var(--sidebar-toggle-bg)] shadow-[var(--sidebar-toggle-shadow)] transition-all duration-150 ease-out hover:border-[color:var(--sidebar-toggle-border-hover)] hover:bg-[color:var(--sidebar-toggle-bg-hover)] md:flex"
+        className="absolute right-0 top-1/2 z-50 hidden h-6 w-6 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[color:var(--sidebar-toggle-border)] bg-[color:var(--sidebar-toggle-bg)] shadow-[var(--sidebar-toggle-shadow)] transition-all duration-150 ease-out hover:border-[color:var(--sidebar-toggle-border-hover)] hover:bg-[color:var(--sidebar-toggle-bg-hover)] md:flex"
         aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
       >
         <ChevronLeft

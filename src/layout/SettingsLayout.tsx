@@ -31,9 +31,9 @@ export function SettingsLayout() {
         <span className="hidden text-xs text-muted sm:inline">{subtitle}</span>
       </div>
 
-      <div className="max-w-2xl mx-auto py-10 px-6">
-        <div className="flex gap-8">
-          <div className="w-48 shrink-0">
+      <div className="mx-auto w-full max-w-5xl px-4 py-10 md:px-6">
+        <div className="flex items-start gap-6 md:gap-8">
+          <div className="w-44 shrink-0">
             {isSettings ? (
               <nav className="flex flex-col gap-1">
                 {[
@@ -75,7 +75,7 @@ export function SettingsLayout() {
             )}
           </div>
 
-          <div className="flex-1">
+          <div className="min-w-0 flex-1">
             <Outlet />
           </div>
         </div>
