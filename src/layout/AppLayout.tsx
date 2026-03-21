@@ -20,9 +20,9 @@ export function AppLayout() {
         </div>
       </header>
 
-      <div className="flex min-h-0 flex-1">
+      <div className="flex min-h-0 flex-1 overflow-hidden">
         <Sidebar collapsed={sidebarCollapsed} onToggleCollapsed={() => setSidebarCollapsed((c) => !c)} />
-        <main className="min-h-0 flex-1 overflow-x-hidden md:pl-[var(--sidebar-w)]">
+        <main className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto md:pl-[var(--sidebar-w)]">
           <div className="mx-auto max-w-6xl px-4 pb-24 pt-0 md:px-8 md:pb-8 md:pt-0">
             <div className="relative z-0">
               <StartupErrorBanner />
