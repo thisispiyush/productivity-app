@@ -42,6 +42,47 @@
     --foreground: var(--text-primary);
     --muted: var(--text-secondary);
 
+    --text-title: var(--foreground);
+    --text-date: var(--muted);
+    --text-quote: var(--muted);
+
+    --sidebar-nav-hover: var(--sidebar-hover);
+    --sidebar-nav-active-bg: transparent;
+    --sidebar-nav-active-text: var(--foreground);
+    --sidebar-nav-inactive-text: var(--text-secondary);
+    --sidebar-nav-border: transparent;
+    --sidebar-username: var(--foreground);
+    
+    --icon-dashboard: #4F6EF7;
+    --icon-habits: #f97316;
+    --icon-tasks: #22c55e;
+    --icon-analytics: #a855f7;
+    --icon-dashboard-active: #4F6EF7;
+    --icon-habits-active: #f97316;
+    --icon-tasks-active: #22c55e;
+    --icon-analytics-active: #a855f7;
+
+    --card-lift-hover: -2px;
+
+    --progress-bg: var(--bg-input);
+    --progress-fill: var(--accent);
+    --progress-label: var(--muted);
+    --progress-value: var(--foreground);
+    --progress-sub: var(--muted);
+
+    --logo-bg: var(--surface);
+    --logo-text: var(--foreground);
+
+    --stat-label-size: 12px;
+    --stat-label-tracking: 0.02em;
+    --stat-label-color: var(--text-muted);
+    --stat-value-color: var(--foreground);
+    --stat-title: var(--foreground);
+
+    --timer-text: var(--foreground);
+    --timer-sub: var(--muted);
+    --timer-num: var(--foreground);
+
     --accent-blue: var(--accent);
     --accent-purple: #8b5cf6;
     --accent-green: #22c55e;
@@ -74,9 +115,9 @@
 
   html.light {
     /* Light theme */
-    --bg-page: #eef0f3;
+    --bg-page: #F0F2F5;
     --bg-card: #ffffff;
-    --bg-card-hover: #fafafa;
+    --bg-card-hover: #ffffff;
     --bg-subtle: #f5f7fa;
     --bg-sidebar: #ffffff;
     --bg-input: #f5f7fa;
@@ -87,15 +128,20 @@
     --border-strong: rgba(0, 0, 0, 0.08);
     --border-hover: rgba(0, 0, 0, 0.12);
     --border-active: rgba(0, 0, 0, 0.14);
-    --card-border: var(--border);
-    --text-primary: #0a0a0a;
-    --text-secondary: #666666;
-    --text-muted: #999999;
+    --card-border: #E5E7EB;
+    
+    --text-primary: #111827;
+    --text-secondary: #6B7280;
+    --text-muted: #9CA3AF;
+    --text-title: #0A0A0A;
+    --text-date: #6B7280;
+    --text-quote: #9CA3AF;
+
     --accent: #4f6ef7;
     --accent-hover: #3d5ce6;
     --accent-subtle: rgba(79, 110, 247, 0.08);
     --sidebar-hover: rgba(0, 0, 0, 0.04);
-    --sidebar-border: rgba(0, 0, 0, 0.06);
+    --sidebar-border: #E5E7EB;
     --sidebar-toggle-bg: #ffffff;
     --sidebar-toggle-bg-hover: #ffffff;
     --sidebar-toggle-border: rgba(0, 0, 0, 0.08);
@@ -120,23 +166,57 @@
     --glass-shadow: 0 1px 0 rgba(15, 23, 42, 0.02), 0 10px 24px rgba(15, 23, 42, 0.06);
     --glass-blur: none;
 
-    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.06), 0 8px 32px rgba(0, 0, 0, 0.04);
-    --shadow-card-hover: 0 2px 4px rgba(0, 0, 0, 0.07), 0 6px 20px rgba(0, 0, 0, 0.07), 0 12px 40px rgba(0, 0, 0, 0.05);
+    --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
+    --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
+    --card-lift-hover: -1px;
     --shadow-popover: 0 8px 32px rgba(0, 0, 0, 0.18);
     --shadow-sidebar: 2px 0 8px rgba(0, 0, 0, 0.04);
 
     --timer-track: rgba(17, 24, 39, 0.08);
 
-    --chart-grid: rgba(17, 24, 39, 0.08);
-    --chart-tick: #6b7280;
-    --chart-cursor: rgba(17, 24, 39, 0.1);
+    --chart-grid: rgba(0, 0, 0, 0.06);
+    --chart-tick: #9CA3AF;
+    --chart-cursor: rgba(0, 0, 0, 0.04);
     --chart-ring-bg: rgba(17, 24, 39, 0.08);
+
+    --sidebar-nav-hover: #F3F4F6;
+    --sidebar-nav-active-bg: #EEF2FF;
+    --sidebar-nav-active-text: #4F6EF7;
+    --sidebar-nav-inactive-text: #6B7280;
+    --sidebar-nav-border: 2px solid #4F6EF7;
+    --sidebar-username: #111827;
+
+    --icon-dashboard: #6B8AF7;
+    --icon-habits: #FB923C;
+    --icon-tasks: #34D399;
+    --icon-analytics: #C084FC;
+    --icon-dashboard-active: #4F6EF7;
+    --icon-habits-active: #f97316;
+    --icon-tasks-active: #22c55e;
+    --icon-analytics-active: #a855f7;
 
     --tooltip-bg: var(--bg-card);
     --tooltip-border: var(--border);
     --tooltip-label: rgba(107, 114, 128, 0.95);
 
-    --stat-label: #444444;
+    --progress-bg: #E5E7EB;
+    --progress-fill: #4F6EF7;
+    --progress-label: #374151;
+    --progress-value: #111827;
+    --progress-sub: #9CA3AF;
+
+    --logo-bg: #111111;
+    --logo-text: #111827;
+
+    --stat-label-size: 11px;
+    --stat-label-tracking: 0.06em;
+    --stat-label-color: #9CA3AF;
+    --stat-value-color: #111827;
+    --stat-title: #0A0A0A;
+
+    --timer-text: #374151;
+    --timer-sub: #9CA3AF;
+    --timer-num: #111827;
 
     color-scheme: light;
   }
@@ -271,8 +351,8 @@
 
   .card:hover {
     border-color: var(--border-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    transform: translateY(var(--card-lift-hover));
+    box-shadow: var(--shadow-card-hover);
   }
 
   .btn-primary {

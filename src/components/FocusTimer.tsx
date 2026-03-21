@@ -197,16 +197,19 @@ export function FocusTimer() {
               style={{ transition: 'stroke-dashoffset 1s linear' }}
             />
           </svg>
-          <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[36px] font-semibold leading-none tracking-tight text-foreground tabular-nums">
+          <div 
+            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[36px] font-semibold leading-none tracking-tight tabular-nums"
+            style={{ color: 'var(--timer-num, var(--text-primary))' }}
+          >
             {formatTime(remaining)}
           </div>
         </div>
 
         <div className="text-center">
-          <div className="text-[14px] font-semibold text-foreground">
+          <div className="text-[14px] font-semibold" style={{ color: 'var(--timer-text, var(--text-primary))' }}>
             {mode === 'focus' ? 'Deep work' : 'Recovery'}
           </div>
-          <div className="mt-1 text-[12px] text-muted-foreground">
+          <div className="mt-1 text-[12px]" style={{ color: 'var(--timer-sub, var(--text-muted))' }}>
             {mode === 'focus'
               ? 'No multitasking. One task.'
               : 'Stand up, breathe, and come back sharp.'}

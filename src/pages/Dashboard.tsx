@@ -73,9 +73,9 @@ export function DashboardPage() {
   return (
     <div className="space-y-6 pt-[32px]">
       <div className="mb-0 pb-4 md:mb-2 md:pb-7 space-y-2">
-        <div className="text-[26px] md:text-[30px] font-bold tracking-[-0.03em] text-[color:var(--text-primary)]">{greeting}</div>
-        <div className="-mt-0.5 text-xs text-[color:var(--chart-tick)]">{dateLabel}</div>
-        <div className="mt-1 max-w-md text-[12px] md:text-sm font-normal text-[color:var(--text-muted)]">{message}</div>
+        <div className="text-[26px] md:text-[30px] font-bold tracking-[-0.03em] text-[color:var(--text-title,var(--text-primary))]">{greeting}</div>
+        <div className="-mt-0.5 text-xs text-[color:var(--text-date,var(--text-secondary))]">{dateLabel}</div>
+        <div className="mt-1 max-w-md text-[12px] md:text-sm font-normal text-[color:var(--text-quote,var(--text-muted))]">{message}</div>
       </div>
 
       <div className="mt-6 grid grid-cols-2 gap-4 md:gap-6 lg:grid-cols-4">
@@ -129,8 +129,8 @@ export function DashboardPage() {
         <Card className="stat-card overflow-hidden hover:translate-y-0 hover:shadow-none">
           <CardContent className="p-0">
             <div className="flex items-center justify-between gap-3">
-              <div className="text-sm font-medium text-[color:var(--text-secondary)]">Weekly progress</div>
-              <div className="text-xs text-[color:var(--chart-tick)]">
+              <div className="text-sm font-medium text-[color:var(--progress-label,var(--text-secondary))]">Weekly progress</div>
+              <div className="text-xs text-[color:var(--text-date,var(--text-secondary))]">
                 Since {weekStart.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
               </div>
             </div>
@@ -138,24 +138,24 @@ export function DashboardPage() {
             <div className="mt-5 space-y-5">
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-[13px]">
-                  <div className="text-[color:var(--text-secondary)]">Habit goal</div>
-                  <div className="tabular-nums text-[color:var(--text-primary)] text-right">
+                  <div className="text-[color:var(--progress-label,var(--text-secondary))]">Habit goal</div>
+                  <div className="tabular-nums text-[color:var(--progress-value,var(--text-primary))] text-right">
                     {habitsCompletedThisWeek}/{weeklyHabitGoal}
                   </div>
                 </div>
                 <ProgressBar value={habitGoalRatio} color="green" />
-                <div className="text-xs text-[color:var(--text-muted)]">Every check-in counts.</div>
+                <div className="text-xs text-[color:var(--progress-sub,var(--text-muted))]">Every check-in counts.</div>
               </div>
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-[13px]">
-                  <div className="text-[color:var(--text-secondary)]">Task goal</div>
-                  <div className="tabular-nums text-[color:var(--text-primary)] text-right">
+                  <div className="text-[color:var(--progress-label,var(--text-secondary))]">Task goal</div>
+                  <div className="tabular-nums text-[color:var(--progress-value,var(--text-primary))] text-right">
                     {tasksCompletedThisWeek}/{weeklyTaskGoal}
                   </div>
                 </div>
                 <ProgressBar value={taskGoalRatio} color="blue" />
-                <div className="text-xs text-[color:var(--text-muted)]">Finish fewer things, better.</div>
+                <div className="text-xs text-[color:var(--progress-sub,var(--text-muted))]">Finish fewer things, better.</div>
               </div>
             </div>
           </CardContent>

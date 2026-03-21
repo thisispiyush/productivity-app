@@ -10,10 +10,10 @@ import { cn } from '@/utils/cn'
 import { SettingsModal } from '@/components/SettingsModal'
 
 const nav = [
-  { to: '/', label: 'Dashboard', icon: LayoutDashboard, colorHex: '#4F6EF7' },
-  { to: '/habits', label: 'Habits', icon: Flame, colorHex: '#f97316' },
-  { to: '/tasks', label: 'Tasks', icon: CheckSquare, colorHex: '#22c55e' },
-  { to: '/analytics', label: 'Analytics', icon: BarChart3, colorHex: '#a855f7' },
+  { id: 'dashboard', to: '/', label: 'Dashboard', icon: LayoutDashboard },
+  { id: 'habits', to: '/habits', label: 'Habits', icon: Flame },
+  { id: 'tasks', to: '/tasks', label: 'Tasks', icon: CheckSquare },
+  { id: 'analytics', to: '/analytics', label: 'Analytics', icon: BarChart3 },
 ] as const
 
 export function Sidebar(_props: {
@@ -44,13 +44,13 @@ export function Sidebar(_props: {
         <div className="shrink-0 pt-4 px-4">
           <NavLink
             to="/"
-            className="flex items-center gap-3 py-2 px-2 -mx-2 rounded-lg transition-colors hover:bg-black/[0.04] dark:hover:bg-white/[0.04] cursor-pointer"
+            className="flex items-center gap-3 py-2 px-2 -mx-2 rounded-lg transition-colors hover:bg-[color:var(--sidebar-nav-hover)] cursor-pointer"
           >
-            <div className="flex h-8 w-8 items-center justify-center rounded-[10px] border border-[color:var(--sidebar-border)] bg-surface text-foreground shrink-0 shadow-sm">
-              <EKGIcon className="h-5 w-5 drop-shadow-sm" />
+            <div className="flex h-8 w-8 items-center justify-center rounded-[10px] border border-[color:var(--sidebar-border)] bg-[color:var(--logo-bg)] text-[color:var(--logo-text)] shrink-0 shadow-sm">
+              <EKGIcon className="h-5 w-5 drop-shadow-sm text-[#4F6EF7]" />
             </div>
             <div className="leading-tight">
-              <p className="font-semibold text-[15px] text-foreground tracking-tight">Pulse</p>
+              <p className="font-semibold text-[15px] text-[color:var(--logo-text)] tracking-tight">Pulse</p>
             </div>
           </NavLink>
         </div>
@@ -62,11 +62,11 @@ export function Sidebar(_props: {
           <button
             type="button"
             onClick={() => setSettingsOpen(true)}
-            className="flex w-full items-center gap-2.5 rounded-lg px-2 py-1.5 transition-colors hover:bg-black/[0.04] dark:hover:bg-white/[0.04] text-left"
+            className="flex w-full items-center gap-2.5 rounded-lg px-2 py-1.5 transition-colors hover:bg-[color:var(--sidebar-nav-hover)] text-left"
           >
             <Avatar name={displayName || defaultName} photoUrl={avatarDataUrl} size={28} />
             <div className="min-w-0 flex-1">
-              <div className="truncate text-[13px] font-medium text-foreground">
+              <div className="truncate text-[13px] font-medium text-[color:var(--sidebar-username)]">
                 {(displayName || defaultName).split(' ')[0]}
               </div>
             </div>
@@ -85,12 +85,14 @@ export function Sidebar(_props: {
                 className={({ isActive }) =>
                   cn(
                     'group flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium transition-all duration-150 ease-out rounded-lg',
-                    !isActive && 'hover:bg-black/[0.04] dark:hover:bg-white/[0.04] text-[color:var(--text-secondary)]',
+                    !isActive && 'hover:bg-[color:var(--sidebar-nav-hover)]',
                   )
                 }
                 style={({ isActive }) => ({
-                  backgroundColor: isActive ? `${item.colorHex}1A` : undefined,
-                  color: isActive ? 'var(--foreground)' : 'var(--text-secondary)',
+                  backgroundColor: isActive ? 'var(--sidebar-nav-active-bg)' : undefined,
+                  color: isActive ? 'var(--sidebar-nav-active-text)' : 'var(--sidebar-nav-inactive-text)',
+                  borderLeft: isActive ? 'var(--sidebar-nav-border)' : '2px solid transparent',
+                  marginLeft: isActive ? '-2px' : '0'
                 })}
               >
                 {({ isActive }) => (
@@ -98,8 +100,8 @@ export function Sidebar(_props: {
                     <Icon 
                       className="h-[18px] w-[18px] transition-colors duration-150 ease-out shrink-0" 
                       style={{ 
-                        color: item.colorHex,
-                        opacity: isActive ? 1 : 0.65
+                        color: isActive ? `var(--icon-${item.id}-active)` : `var(--icon-${item.id})`,
+                        opacity: isActive ? 1 : 0.60
                       }} 
                     />
                     <span className="min-w-0 truncate" style={{ fontWeight: isActive ? 600 : 500 }}>
