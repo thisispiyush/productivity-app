@@ -31,7 +31,6 @@ export function Sidebar({
     <aside
       className={cn(
         'fixed left-0 top-0 z-40 hidden h-screen flex-col overflow-hidden border-r border-[color:var(--sidebar-border)] bg-[color:var(--bg-sidebar)] pb-4 md:flex',
-        'relative',
         'transition-[width] duration-200 ease-out',
         collapsed ? 'w-[60px] px-2' : 'w-[220px] px-3',
       )}
@@ -39,7 +38,7 @@ export function Sidebar({
       <button
         type="button"
         onClick={onToggleCollapsed}
-        className="absolute right-0 top-1/2 z-50 hidden h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full border border-[color:var(--sidebar-toggle-border)] bg-[color:var(--sidebar-toggle-bg)] shadow-[var(--sidebar-toggle-shadow)] transition-all duration-150 ease-out hover:border-[color:var(--sidebar-toggle-border-hover)] hover:bg-[color:var(--sidebar-toggle-bg-hover)] md:flex"
+        className="absolute right-0 top-1/2 z-50 hidden h-8 w-5 -translate-y-1/2 items-center justify-center rounded-l-lg border border-r-0 border-[color:var(--sidebar-toggle-border)] bg-[color:var(--sidebar-toggle-bg)] shadow-[var(--sidebar-toggle-shadow)] transition-all duration-150 ease-out hover:border-[color:var(--sidebar-toggle-border-hover)] hover:bg-[color:var(--sidebar-toggle-bg-hover)] md:flex"
         aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
       >
         <ChevronLeft
@@ -60,7 +59,7 @@ export function Sidebar({
             </div>
           ) : null}
         </Link>
-        <div className="mt-3 h-px bg-[color:var(--border)]" />
+        <div className={cn("mt-3 h-px bg-gradient-to-r from-transparent via-[color:var(--sidebar-border)] to-transparent", collapsed ? "-mx-2" : "-mx-3")} />
       </div>
 
       <TooltipProvider delayDuration={80}>

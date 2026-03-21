@@ -1,7 +1,6 @@
+import * as React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { ChevronDown, LogIn, Moon, Settings, Sun, User, LogOut } from 'lucide-react'
-import * as React from 'react'
-import { format } from 'date-fns'
 
 import { Avatar } from '@/components/Avatar'
 import { Button } from '@/components/ui/button'
@@ -39,18 +38,6 @@ export function TopNav() {
   const { displayName } = useUser()
   const [menuOpen, setMenuOpen] = React.useState(false)
   const [avatarDataUrl] = useLocalStorageState<string | null>('pulse-profile.avatar', null)
-  const [time, setTime] = React.useState('')
-
-  React.useEffect(() => {
-    const update = () => {
-      setTime(format(new Date(), "EEE, MMM d \u2022 hh:mm a"))
-    }
-
-    update()
-    const interval = window.setInterval(update, 60000)
-
-    return () => window.clearInterval(interval)
-  }, [])
 
   return (
     <div className="flex h-full w-full items-center justify-between gap-4">
@@ -62,9 +49,6 @@ export function TopNav() {
       <div className="relative flex items-center gap-3">
         {user ? (
           <div className="relative flex items-center gap-3">
-            <p className="hidden text-xs text-muted sm:block" style={{ fontFamily: 'inherit' }}>
-              {time}
-            </p>
             <button
               type="button"
               onClick={() => setMenuOpen((open) => !open)}
