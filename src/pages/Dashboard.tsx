@@ -109,7 +109,7 @@ export function DashboardPage() {
               value={
                 <span className="inline-flex items-center gap-2">
                   <Flame className="h-5 w-5 text-accentPurple" />
-                  <span className="tabular-nums">{streak} days</span>
+                  <span className="tabular-nums">{streak === 1 ? '1 day' : `${streak} days`}</span>
                 </span>
               }
               subtitle="At least one habit per day"
