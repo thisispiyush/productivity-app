@@ -73,8 +73,8 @@ export function DashboardPage() {
   const taskGoalRatio = tasksCompletedThisWeek / Math.max(1, weeklyTaskGoal)
 
   return (
-    <div className="space-y-6">
-      <div className="mb-2 pb-7 pt-8 space-y-2">
+    <div className="space-y-6 pt-[32px]">
+      <div className="mb-2 pb-7 space-y-2">
         <div className="text-[30px] font-bold tracking-[-0.03em] text-[color:var(--text-primary)]">{greeting}</div>
         <div className="-mt-0.5 text-xs text-[color:var(--chart-tick)]">{dateLabel}</div>
         <div className="mt-1 max-w-md text-sm font-normal text-[color:var(--text-muted)]">{message}</div>

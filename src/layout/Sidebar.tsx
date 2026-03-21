@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { BarChart3, CheckSquare, Flame, LayoutDashboard } from 'lucide-react'
+import { BarChart3, CheckSquare, Flame, LayoutDashboard, LogOut, Settings, User } from 'lucide-react'
 
 import { Avatar } from '@/components/Avatar'
 import { EKGIcon } from '@/components/icons/EKGIcon'
@@ -20,8 +20,10 @@ export function Sidebar(_props: {
   collapsed?: boolean
   onToggleCollapsed?: () => void
 }) {
-  const { user } = useAuth()
+  const { user, signOut } = useAuth()
   const { displayName } = useUser()
+  const [menuOpen, setMenuOpen] = React.useState(false)
+  
   const defaultName = React.useMemo(() => {
     const email = user?.email ?? ''
     const base = email.includes('@') ? email.split('@')[0] : email
@@ -46,8 +48,12 @@ export function Sidebar(_props: {
       <div className="h-px bg-[color:var(--sidebar-border)] opacity-60 mx-4 mt-4 mb-4" />
 
       {/* User section */}
-      <div className="px-4 pb-4">
-        <div className="flex items-center gap-2.5">
+      <div className="relative px-4 pb-4">
+        <button
+          type="button"
+          onClick={() => setMenuOpen((o) => !o)}
+          className="flex w-full items-center gap-2.5 rounded-lg px-2 py-1.5 transition-colors hover:bg-black/[0.04] dark:hover:bg-white/[0.04] text-left"
+        >
           <Avatar name={displayName || defaultName} photoUrl={avatarDataUrl} size={28} />
           <div className="min-w-0 flex-1">
             <div className="truncate text-[13px] font-medium text-foreground leading-tight pb-0.5">
@@ -57,7 +63,40 @@ export function Sidebar(_props: {
               {user?.email ?? 'Not logged in'}
             </div>
           </div>
-        </div>
+        </button>
+
+        {menuOpen ? (
+          <div className="absolute left-4 top-[calc(100%-8px)] z-50 mt-1 min-w-[200px] rounded-[10px] border border-[color:var(--border-strong)] bg-card p-1.5 text-sm shadow-[var(--shadow-popover)]">
+            <Link
+              to="/profile"
+              onClick={() => setMenuOpen(false)}
+              className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-[13px] text-muted-foreground transition-colors hover:bg-[color:var(--sidebar-hover)] hover:text-foreground"
+            >
+              <User className="h-4 w-4" />
+              Profile
+            </Link>
+            <Link
+              to="/settings"
+              onClick={() => setMenuOpen(false)}
+              className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-[13px] text-muted-foreground transition-colors hover:bg-[color:var(--sidebar-hover)] hover:text-foreground"
+            >
+              <Settings className="h-4 w-4" />
+              Settings
+            </Link>
+            <div className="my-1 h-px bg-[color:var(--sidebar-border)]" />
+            <button
+              type="button"
+              onClick={async () => {
+                setMenuOpen(false)
+                if (signOut) await signOut()
+              }}
+              className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-[13px] text-muted-foreground transition-colors hover:bg-[rgba(239,68,68,0.06)] hover:text-[#ef4444]"
+            >
+              <LogOut className="h-4 w-4" />
+              Sign out
+            </button>
+          </div>
+        ) : null}
       </div>
 
       {/* Nav section */}

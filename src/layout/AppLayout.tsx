@@ -5,7 +5,6 @@ import * as React from 'react'
 import { StartupErrorBanner } from '@/components/StartupErrorBanner'
 import { Sidebar } from '@/layout/Sidebar'
 import { MobileBottomNav } from '@/layout/MobileBottomNav'
-import { TopNav } from '@/layout/TopNav'
 
 export function AppLayout() {
   const location = useLocation()
@@ -14,11 +13,7 @@ export function AppLayout() {
 
   return (
     <div className="h-screen bg-background" style={{ ['--sidebar-w' as never]: sidebarWidth }}>
-      <header className="sticky top-0 z-40 h-[52px] border-b border-[color:var(--header-border)] bg-[color:var(--bg-header)] shadow-[var(--shadow-header)]">
-        <div className="mx-auto flex h-full max-w-6xl items-center px-6 md:pl-[calc(var(--sidebar-w)+1.5rem)]">
-          <TopNav />
-        </div>
-      </header>
+
 
       <div className="flex min-h-0 flex-1 overflow-hidden">
         <Sidebar collapsed={sidebarCollapsed} onToggleCollapsed={() => setSidebarCollapsed((c) => !c)} />

@@ -45,8 +45,12 @@ export function HabitTrackerPage() {
   }
 
   return (
-    <div className="space-y-6 pt-6 md:pt-8">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-end">
+    <div className="space-y-6 pt-[32px]">
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="text-[24px] font-semibold tracking-tight text-foreground">Habits</h1>
+          <p className="mt-1 text-[13px] text-muted-foreground">Consistency beats perfection.</p>
+        </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <Card className="hidden sm:block">
             <CardContent className="flex items-center gap-2 p-4 text-sm text-muted">

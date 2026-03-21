@@ -220,7 +220,11 @@ export function AnalyticsPage() {
   })
 
   return (
-    <div className="space-y-6 pt-6 md:pt-8">
+    <div className="space-y-6 pt-[32px]">
+      <div className="mb-6">
+        <h1 className="text-[24px] font-semibold tracking-tight text-foreground">Analytics</h1>
+        <p className="mt-1 text-[13px] text-muted-foreground">Honest trends over time.</p>
+      </div>
 
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
         <StatCard title="Total Habits Completed" value={totalHabitsCompleted} icon={Target} accent="blue" />
