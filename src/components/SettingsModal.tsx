@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Camera, Download, Moon, Pencil, Sun, Trash2 } from 'lucide-react'
+import { Camera, Download, Moon, Pencil, Sun, Trash2, X } from 'lucide-react'
 
 import { Avatar } from '@/components/Avatar'
 import { Button } from '@/components/ui/button'
@@ -74,7 +74,7 @@ function Select({
   )
 }
 
-type TabId = 'profile' | 'appearance' | 'preferences' | 'data'
+type TabId = 'profile' | 'appearance' | 'preferences' | 'data' | 'account'
 
 export function SettingsModal({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
   const [activeTab, setActiveTab] = React.useState<TabId>('profile')
@@ -202,8 +202,12 @@ export function SettingsModal({ open, onOpenChange }: { open: boolean; onOpenCha
           else setActiveTab(id)
         }}
         className={cn(
-          "w-full flex items-center px-3 py-1.5 rounded-lg text-[13px] font-medium transition-colors text-left",
-          isActive ? "bg-accentBlue/10 text-accentBlue" : "text-[color:var(--text-secondary)] hover:bg-black/[0.04] dark:hover:bg-white/[0.04]"
+          "whitespace-nowrap transition-colors text-left",
+          "px-1 py-3 text-sm font-medium border-b-2 flex items-center",
+          "md:w-full md:px-3 md:py-1.5 md:rounded-lg md:text-[13px] md:border-0",
+          isActive 
+            ? "border-accentBlue text-accentBlue md:bg-accentBlue/10" 
+            : "border-transparent text-muted-foreground hover:text-foreground md:text-[color:var(--text-secondary)] md:hover:bg-black/[0.04] md:dark:hover:bg-white/[0.04]"
         )}
       >
         {label}
@@ -213,24 +217,36 @@ export function SettingsModal({ open, onOpenChange }: { open: boolean; onOpenCha
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-[800px] h-[85vh] max-h-[560px] p-0 gap-0 overflow-hidden flex flex-row rounded-xl border border-border shadow-2xl duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-[12px]">
+      <DialogContent className="w-[calc(100%-32px)] md:w-full max-w-[800px] h-[85vh] max-h-[560px] p-0 gap-0 overflow-hidden flex flex-col md:flex-row rounded-2xl md:rounded-[12px] border border-border shadow-2xl duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]">
+        {/* Mobile Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-border/50 md:hidden shrunk-0">
+          <h2 className="text-lg font-semibold tracking-tight">Settings</h2>
+          <button
+            onClick={() => onOpenChange(false)}
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-surface/80 opacity-80 hover:opacity-100"
+            aria-label="Close settings"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
         {/* LEFT COLUMN - Sidebar */}
-        <div className="w-[220px] shrink-0 border-r border-border/50 bg-[color:var(--bg-sidebar)] flex flex-col h-full overflow-y-auto py-3 px-2">
+        <div className="md:w-[220px] shrink-0 border-b md:border-b-0 md:border-r border-border/50 bg-[color:var(--bg-sidebar)] flex flex-row overflow-x-auto md:flex-col md:h-full md:overflow-y-auto px-4 py-0 md:py-3 md:px-2 gap-4 md:gap-0" style={{ scrollbarWidth: 'none' }}>
           
-          <SectionLabel>Account</SectionLabel>
-          <div className="space-y-0.5">
+          <div className="hidden md:block"><SectionLabel>Account</SectionLabel></div>
+          <div className="contents md:block md:space-y-0.5">
             <TabButton id="profile" label="Profile" />
             <TabButton id="appearance" label="Appearance" />
           </div>
 
-          <SectionLabel>Preferences</SectionLabel>
-          <div className="space-y-0.5">
+          <div className="hidden md:block"><SectionLabel>Preferences</SectionLabel></div>
+          <div className="contents md:block md:space-y-0.5">
             <TabButton id="preferences" label="Preferences" />
             <TabButton id="data" label="Data & Privacy" />
           </div>
 
-          <SectionLabel>Account Control</SectionLabel>
-          <div className="space-y-0.5 mt-1">
+          <div className="hidden md:block"><SectionLabel>Account Control</SectionLabel></div>
+          <div className="hidden md:block md:space-y-0.5 md:mt-1">
             <button
               onClick={doLogout}
               disabled={signingOut}
@@ -246,17 +262,20 @@ export function SettingsModal({ open, onOpenChange }: { open: boolean; onOpenCha
               Delete account
             </button>
           </div>
+          <div className="contents md:hidden">
+            <TabButton id="account" label="Account Control" />
+          </div>
         </div>
 
         {/* RIGHT COLUMN - Content */}
         <div className="flex-1 bg-card h-full overflow-y-auto">
-          <div className="max-w-2xl mx-auto px-8 py-8">
+          <div className="max-w-2xl mx-auto px-4 py-6 md:px-8 md:py-8">
             {activeTab === 'profile' && (
               <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                 <h2 className="text-xl font-semibold mb-6">My Profile</h2>
                 
-                <div className="flex items-center gap-6 mb-8">
-                  <div className="relative" ref={avatarMenuRef}>
+                <div className="flex items-center gap-4 md:gap-6 mb-8">
+                  <div className="relative shrink-0" ref={avatarMenuRef}>
                     <button
                       type="button"
                       onClick={() => setAvatarMenuOpen((o) => !o)}
@@ -322,9 +341,12 @@ export function SettingsModal({ open, onOpenChange }: { open: boolean; onOpenCha
                       if (e.target) e.target.value = ''
                     }}
                   />
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <div className="text-sm font-medium text-foreground mb-1">Avatar</div>
-                    <div className="text-xs text-muted-foreground">Click the image to change or remove your profile photo.</div>
+                    <div className="text-[12px] md:text-xs text-muted-foreground">
+                      <span className="md:hidden">Tap to change photo</span>
+                      <span className="hidden md:inline">Click the image to change or remove your profile photo.</span>
+                    </div>
                   </div>
                 </div>
 
@@ -465,6 +487,33 @@ export function SettingsModal({ open, onOpenChange }: { open: boolean; onOpenCha
                   }
                   last
                 />
+              </div>
+            )}
+
+            {activeTab === 'account' && (
+              <div className="animate-in fade-in slide-in-from-bottom-2 duration-300 md:hidden">
+                <h2 className="text-xl font-semibold mb-6">Account Control</h2>
+                <div className="space-y-4">
+                  <Row
+                    title="Sign out"
+                    description="End your session on this device."
+                    right={
+                      <Button variant="secondary" onClick={doLogout} disabled={signingOut} className="rounded-lg h-9 text-xs text-foreground">
+                        Sign out
+                      </Button>
+                    }
+                  />
+                  <Row
+                    title="Delete account"
+                    description="Permanently erase your account and data."
+                    right={
+                      <Button variant="secondary" onClick={doDeleteAccount} disabled={clearing} className="rounded-lg h-9 text-xs border border-red-500/30 text-red-600 hover:bg-red-500/10">
+                        Delete 
+                      </Button>
+                    }
+                    last
+                  />
+                </div>
               </div>
             )}
 
