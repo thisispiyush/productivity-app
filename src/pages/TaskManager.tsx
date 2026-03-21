@@ -116,10 +116,6 @@ export function TaskManagerPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <div className="text-2xl font-semibold tracking-tight md:text-3xl">Task Manager</div>
-        <div className="mt-2 text-sm text-muted">Drag to reorder. Keep the list small and sharp.</div>
-      </div>
 
       <Card>
         <CardContent className="p-4 md:p-6">

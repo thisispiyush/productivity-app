@@ -77,11 +77,6 @@ export function ProfilePage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <div className="text-2xl font-semibold tracking-tight md:text-3xl">Profile</div>
-        <div className="mt-2 text-sm text-muted">Your account details.</div>
-      </div>
-
       <Card className="overflow-hidden">
         <CardContent className="p-6">
           <div className="flex items-center gap-4">
