@@ -35,14 +35,17 @@ export function Sidebar(_props: {
       <aside className="fixed left-0 top-0 z-40 hidden h-screen w-[220px] flex-col overflow-y-auto border-r border-[color:var(--sidebar-border)] bg-[color:var(--bg-sidebar)] md:flex">
         {/* Top section: Logo */}
         <div className="shrink-0 pt-4 px-4">
-          <div className="flex items-center gap-3 py-2">
+          <NavLink
+            to="/"
+            className="flex items-center gap-3 py-2 px-2 -mx-2 rounded-lg transition-colors hover:bg-black/[0.04] dark:hover:bg-white/[0.04] cursor-pointer"
+          >
             <div className="flex h-8 w-8 items-center justify-center rounded-[10px] border border-[color:var(--sidebar-border)] bg-surface text-foreground shrink-0 shadow-sm">
               <EKGIcon className="h-5 w-5 drop-shadow-sm" />
             </div>
             <div className="leading-tight">
               <p className="font-semibold text-[15px] text-foreground tracking-tight">Pulse</p>
             </div>
-          </div>
+          </NavLink>
         </div>
 
         <div className="h-px bg-[color:var(--sidebar-border)] opacity-60 mx-4 mt-4 mb-4" />

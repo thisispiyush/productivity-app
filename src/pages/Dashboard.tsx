@@ -1,7 +1,7 @@
 import { CheckCircle2, Flame, ListTodo, Target } from 'lucide-react'
 import { motion } from 'framer-motion'
 
-import { RingChart } from '@/components/charts/RingChart'
+
 import { WeeklyLineChart } from '@/components/charts/WeeklyLineChart'
 import { FocusTimer } from '@/components/FocusTimer'
 import { ProgressBar } from '@/components/ProgressBar'
@@ -35,11 +35,9 @@ export function DashboardPage() {
 
   const today = formatISODate(startOfDay(new Date()))
   const habitsDoneToday = habits.filter((h) => h.completions[today]).length
-  const habitRatio = habitsDoneToday / Math.max(1, habits.length)
 
   const tasksDone = tasks.filter((t) => t.completed).length
   const tasksPending = tasks.filter((t) => !t.completed).length
-  const taskRatio = tasksDone / Math.max(1, tasks.length)
 
   const weekStart = startOfWeek(new Date(), 1)
   const weekStartISO = formatISODate(weekStart)
@@ -122,9 +120,7 @@ export function DashboardPage() {
         <StatCard title="Pending Tasks" value={tasksPending} subtitle="Queue remaining" icon={ListTodo} accent="blue" />
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <RingChart title="Habit Completion" value={habitRatio} color="green" subtitle="Today" />
-        <RingChart title="Task Completion" value={taskRatio} color="blue" subtitle="All tasks" />
+      <div className="w-full">
         <WeeklyLineChart data={weekly} />
       </div>
 
