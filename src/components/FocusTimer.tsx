@@ -60,7 +60,7 @@ export function FocusTimer() {
   }, [focusSeconds])
 
   const total = mode === 'focus' ? focusSeconds : mode === 'break' ? BREAK_SECONDS : LONG_BREAK_SECONDS
-  const circumference = 2 * Math.PI * 45
+  const circumference = 2 * Math.PI * 56
   const ringProgress = Math.max(0, Math.min(1, remaining / Math.max(1, total))) * circumference
 
   useInterval(
@@ -126,7 +126,7 @@ export function FocusTimer() {
   }
 
   return (
-    <Card className="stat-card overflow-hidden hover:translate-y-0 hover:shadow-none">
+    <Card className="stat-card overflow-hidden hover:translate-y-0 hover:shadow-none p-6">
       <div className="flex items-center justify-between gap-3">
         <div className="text-sm font-medium text-[color:var(--text-secondary)]">Focus Mode</div>
         <div className="text-xs font-medium text-[color:var(--text-muted)]">
@@ -173,54 +173,60 @@ export function FocusTimer() {
         </div>
       ) : null}
 
-      <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex min-w-0 items-center gap-4">
-          <div className="relative h-[120px] w-[120px] shrink-0 overflow-hidden rounded-[14px] border border-border bg-[color:var(--bg-input)]">
-            <svg
-              width="120"
-              height="120"
-              viewBox="0 0 120 120"
-              aria-hidden="true"
-              className="absolute inset-0 h-full w-full"
-            >
-              <circle cx="60" cy="60" r="45" fill="none" stroke="var(--bg-subtle)" strokeWidth="3" />
-              <circle
-                cx="60"
-                cy="60"
-                r="45"
-                fill="none"
-                stroke={mode === 'focus' ? '#4F6EF7' : 'var(--accent-green)'}
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeDasharray={circumference}
-                strokeDashoffset={circumference - ringProgress}
-                transform="rotate(-90 60 60)"
-                style={{ transition: 'stroke-dashoffset 1s linear' }}
-              />
-            </svg>
-            <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[34px] font-light leading-none tracking-[-0.02em] text-foreground tabular-nums">
-              {formatTime(remaining)}
-            </div>
-          </div>
-
-          <div className="min-w-0">
-            <div className="text-[13px] font-medium text-[color:var(--text-secondary)]">
-              {mode === 'focus' ? 'Deep work' : 'Recovery'}
-            </div>
-            <div className="mt-1 text-xs leading-5 text-[color:var(--text-muted)]">
-              {mode === 'focus'
-                ? 'No multitasking. One task. One timer.'
-                : 'Stand up, breathe, and come back sharp.'}
-            </div>
+      <div className="mt-8 flex flex-col items-center justify-center gap-6 pb-2">
+        <div className="relative h-[120px] w-[120px] shrink-0">
+          <svg
+            width="120"
+            height="120"
+            viewBox="0 0 120 120"
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full"
+          >
+            <circle cx="60" cy="60" r="56" fill="none" stroke="var(--bg-subtle)" strokeWidth="4" />
+            <circle
+              cx="60"
+              cy="60"
+              r="56"
+              fill="none"
+              stroke={mode === 'focus' ? '#4F6EF7' : 'var(--accent-green)'}
+              strokeWidth="4"
+              strokeLinecap="round"
+              strokeDasharray={circumference}
+              strokeDashoffset={circumference - ringProgress}
+              transform="rotate(-90 60 60)"
+              style={{ transition: 'stroke-dashoffset 1s linear' }}
+            />
+          </svg>
+          <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[36px] font-semibold leading-none tracking-tight text-foreground tabular-nums">
+            {formatTime(remaining)}
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <button type="button" className="btn-primary inline-flex items-center gap-2" onClick={() => setRunning((r) => !r)}>
+        <div className="text-center">
+          <div className="text-[14px] font-semibold text-foreground">
+            {mode === 'focus' ? 'Deep work' : 'Recovery'}
+          </div>
+          <div className="mt-1 text-[12px] text-muted-foreground">
+            {mode === 'focus'
+              ? 'No multitasking. One task.'
+              : 'Stand up, breathe, and come back sharp.'}
+          </div>
+        </div>
+
+        <div className="flex items-center justify-center gap-3">
+          <button
+            type="button"
+            className="inline-flex h-9 items-center justify-center gap-2 rounded-lg bg-[#4F6EF7] px-4 text-sm font-medium text-white transition-colors hover:bg-[#3b5bdb]"
+            onClick={() => setRunning((r) => !r)}
+          >
             {running ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
             {running ? 'Pause' : 'Start'}
           </button>
-          <button type="button" className="btn-secondary inline-flex items-center gap-2" onClick={reset}>
+          <button
+            type="button"
+            className="inline-flex h-9 items-center justify-center gap-2 rounded-lg border border-border bg-transparent px-4 text-sm font-medium text-foreground transition-colors hover:bg-[color:var(--surface-hover)]"
+            onClick={reset}
+          >
             <RotateCcw className="h-4 w-4" />
             Reset
           </button>
@@ -229,4 +235,3 @@ export function FocusTimer() {
     </Card>
   )
 }
-
